@@ -1,0 +1,2719 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}		%teoremi
+\usepackage{tikz}		%disegnare immagini
+\usepackage{marginnote}
+
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
+	{\raggedright\footnotesize #1}}
+
+%THEOREMS, ...
+\newtheoremstyle{break}%
+{}{}%
+{}{}%
+{\itshape}{}%
+{\newline}{}
+
+
+\theoremstyle{break}
+\newtheorem{ex}{Esempio}
+\newtheorem{defn}{Definizione}
+
+\theoremstyle{remark}
+\newtheorem{oss}{Osservazione}
+\newtheorem{idea}{Idea}
+
+\theoremstyle{definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{teo}{Teorema}
+\newtheorem{prop}{Proprietà}
+\newtheorem{coroll}{Corollario}
+
+%NEW COMMANDS
+\newcommand{\bbx}{\mathbb{X}}
+\newcommand{\bbr}{\mathbb{R}}
+\newcommand{\bbn}{\mathbb{N}}
+\newcommand{\ra}{\Rightarrow}
+\newcommand{\Lagr}{\mathcal{L}}
+
+\title{Cosmologia del primo universo}	
+
+
+\usepackage[top=2cm, bottom=1.3cm, left=1cm, right=5cm, heightrounded,
+marginparwidth=4.6cm, marginparsep=3mm]{geometry} %to show the margin
+
+\begin{document}
+\maketitle
+
+\section{Richiami di RG}
+Nello spazio-tempo di Minkowski possiamo definire un prodotto scalare 
+\[
+A \cdot B = A^\mu B^\mu = g_{\mu \nu} A^\mu B^\nu
+\]
+ed un elemento di lunghezza invariante
+
+\marginpar{Utilizziamo come convenzione $\eta_{\mu \nu} = diag\{-, +, +, +\}$}
+
+\[
+ds^2 = g_{\mu \nu}dx^\mu dx^\nu
+\]
+
+
+\subsection{Principio di equivalenza}
+Versione debole: è sempre possibile ridursi localmente ad uno spazio piatto in cui le leggi della meccanica siano uguali a quelle in assenza di gravità. 
+
+\begin{ex}
+	Consideriamo una particella in un ascensore in caduta libera. La particella si comporta come un sistema inerziale 
+	\[
+	F_{tot} = m_g g - m_i a
+	\]
+	\[
+	g = a \ra m_i = m_a
+	\]
+	poichè sulla particella non agiscono forze esterne. Allora la massa inerziale è uguale a quella gravitazionale.
+\end{ex}
+
+Versione forte: L'equivalenza si estende a tutte le leggi fisiche, non solo quelle della meccanica.
+
+\begin{ex}[Esperimento ideale della propagazione della luce]
+	Consideriamo un ascensore che si muove in caduta libera ed una particella che si muove trasversalmente al suo interno. Per il principio di equivalenza il moto della particella deve essere rettilineo uniforme.
+	\\
+	Nel sistema del laboratorio, affinchè la particella attraversi la metà dell'ascensore, deve avere una traiettoria curva. Possiamo perciò dedurre che cambiando le leggi del moto cambiano le traiettorie.
+	\\
+	Nel sistema in caduta libera, usando le coordinate $\{\xi^\alpha\}$, si ha che
+	\[
+	\frac{d^2\xi^\alpha}{d\tau^2} = 0
+	\]
+	dove $\tau$ è il tempo nel sistema solidale. Se cambiamo coordinate $\xi^\alpha \to x^\mu$ allora l'equazione del moto diventa
+	\[
+	0 = \frac{d}{d\tau}(\frac{\partial\xi^\alpha}{\partial x^\mu} \frac{\partial x^\mu}{\partial \tau}) = \frac{\partial^2 \xi^\alpha}{\partial x^\mu \partial x^\nu} \frac{\partial x^\mu}{\partial \tau} \frac{\partial x^\nu}{\partial \tau} + \frac{\partial\xi^\alpha}{\partial x^\mu}\frac{\partial^2 x^\mu}{\partial \tau^2}	
+	\]
+	Moltiplicando per $\frac{\partial x^\lambda}{\partial \xi^\alpha}$ otteniamo che 
+	\[
+	\frac{\partial^2 x^\mu}{\partial \tau^2} \underbrace{ \frac{\partial\xi^\alpha}{\partial x^\mu}\frac{\partial x^\lambda}{\partial \xi^\alpha} }_{ \delta_\mu^\lambda } + \underbrace{\big( \frac{\partial^2 \xi^\alpha}{\partial x^\mu \partial x^\nu} \frac{\partial x^\lambda}{\partial \xi^\alpha} \big)}_{\text{Simboli di Christoffel}, \Gamma^\lambda_{\mu \nu} }  \frac{\partial x^\mu}{\partial \tau} \frac{\partial x^\nu}{\partial \tau} = 0
+	\]
+	Otteniamo così l'equazione della geodetica
+	
+	\[
+	\boxed{\frac{d^2 x^\lambda}{d \tau^2} +  \Gamma^\lambda_{\mu \nu}\frac{\partial x^\mu}{\partial \tau} \frac{\partial x^\nu}{\partial \tau} = 0 }
+	\]
+\end{ex}
+
+\begin{oss}
+	Nel caso dei fotoni non possiamo lavorare con $\tau$, tuttavia si può dimostrare che giungiamo alla stessa equazione.
+\end{oss}
+
+Nel sistema in caduta libera poi
+\[
+ds'^2 = \eta_{\alpha \beta}d\xi^\alpha d\xi^\beta = \eta_{\alpha \beta} \frac{\partial\xi^\alpha}{\partial x^\mu} dx^\mu \frac{\partial\xi^\beta}{\partial x^\nu} dx^\nu = \big( \eta_{\alpha \beta} \frac{\partial\xi^\alpha}{\partial x^\mu}\frac{\partial\xi^\beta}{\partial x^\nu} \big) dx^\mu dx^\nu = g_{\mu \nu} dx^\mu dx^\nu = ds^2 
+\]
+Allora dall'invarianza di $ds^2$ segue che 
+\[
+\eta_{\alpha \beta} \frac{\partial\xi^\alpha}{\partial x^\mu}\frac{\partial\xi^\beta}{\partial x^\nu} = g_{\mu \nu}
+\]
+
+\begin{ex}[Redshift gravitazionale]
+	Consideriamo un sistema di due punti A e B in caduta libera attraversati da un segnale di frequenza $\nu$. Per il principio di equivalenza debole sappiamo che, nel sistema solidale, in B misuriamo la stessa frequenza che misuriamo in A $\nu_B = \nu_A$, tuttavia nel sistema del laboratorio B si allontana, abbiamo dunque un effetto Doppler che il campo gravitazionale deve compensare.
+	\\
+	Nel sistema solidale $d\xi^i = 0$, allora
+	\[
+	ds = c d\tau = \sqrt{\eta_{\alpha \beta} d\xi^\alpha d\xi^\beta } = \sqrt{ \eta_{\alpha \beta} \frac{\partial\xi^\alpha}{\partial x^\mu}\frac{\partial\xi^\beta}{\partial x^\nu} dx^\mu dx^\nu  } = \sqrt{ g_{\mu \nu} dx^\mu dx^\nu }
+	\]
+	Dividendo per $cdt$ otteniamo
+	\[
+	\frac{d\tau}{dt} = \frac{1}{c} \sqrt{ g_{\mu \nu} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt} }
+	\]
+	Se consideriamo l'orologio a riposo 
+	\marginpar{$g_{00} < 1 \ra \Delta t > \Delta \tau$: dilatazione dei tempi, redshift gravitazionale}
+	\[
+	\frac{d\tau}{dt} = \sqrt{g_{00}}
+	\]
+	Allora
+	\[
+	\frac{\nu_2}{\nu_1} = \frac{dt_1}{dt_2} = \sqrt{\frac{g_{00}(x_2)}{g_{00}(x_1)}}
+	\]
+	dove $\nu_i \propto \frac{1}{dt_i}$ è la frequenza misurata nel laboratorio nel punto i-esimo.
+\end{ex}
+
+Consideriamo ora il limite newtoniano (piccole velocità) allora 
+\[
+g_{\mu \nu} = \eta_{\mu \nu} + h_{\mu \nu}
+\]
+detto limite di campo debole,con $g_{0i} = 0$ per invarianza temporale e $|h_{\mu \nu}| \ll 1$.
+\\
+In questo limite l'equazione geodetica diventa 
+\[
+\frac{d^2 x^i}{dt^2} = - \frac{c^2}{2} \vec{\nabla}h_{00}
+\]
+che deve ricondursi all'equazione di Poisson per il campo gravitazionale, cioè
+\[
+\frac{d^2 x^i}{dt^2} = - \vec{\nabla}\Phi
+\]
+con $\Phi$ potenziale gravitazionale. Allora $h_{00} = \frac{2\Phi}{c^2}$ dove le BC determinano la costante che risulta quindi essere 0. Inoltre osserviamo che $\frac{\Delta\nu}{\nu} = \Delta\Phi$.
+
+Richiamiamo adesso alcune proprietà. Detta $g = det{g_{\mu \nu}}$, allora la forma volume invariante è 
+	\[
+	\sqrt{-g}d^4x = \sqrt{-g'} d^4 x'
+	\]
+e 
+\[
+\partial_\alpha g = g g^{\mu \nu} \partial_\alpha g_{\mu \nu}
+\]
+Inoltre i simboli di Christoffel sono 
+\[
+\Gamma^\mu_{\rho \nu} = \frac12 g^{\mu \lambda} (\partial_\rho g_{\nu \lambda} + \partial_\nu g_{\rho \lambda} - \partial_\lambda g_{\nu \rho}  )
+\]
+ed hanno la proprietà che
+\[
+\Gamma^\mu_{\mu \nu = \partial_\nu}(\ln\sqrt{-g})
+\]
+Infine ricordiamo che la derivata covariante della metrica è nulla, infatti se $A_\mu = g_{\mu \nu} A^\nu$ allora
+\[
+D_\lambda A_\mu = D_\lambda( g_{\mu \nu} A^\nu) = (D_\lambda g_{\mu \nu}) A^\nu + g_{\mu \nu} D_\lambda A^\nu = (D_\lambda g_{\mu \nu}) A^\nu + g_{\mu \nu}(D A)^\nu_\lambda = (D_\lambda g_{\mu \nu}) A^\nu + D_\lambda A_\mu
+\]
+quindi $D_\lambda g_{\mu \nu} = 0 \quad \forall \mu, \nu, \lambda$.
+
+\subsection{Isometrie}
+Le isometrie sono quelle trasformazioni che lasciano invariata la metrica. In generale una metrica trasforma nel modo seguente
+\[
+g_{\mu \nu}(x) = \frac{\partial x'^\rho}{\partial x^\mu} \frac{\partial x'^\sigma}{\partial x^\nu} g'_{\rho \sigma}(x')
+\]
+allora un isometria è una trasformazione tale per cui
+\[
+g'_{\rho \sigma}(x) = g_{\rho \sigma}(x)
+\]
+Consideriamo una trasformazione di coordinate infinitesima 
+\[
+x'^\mu = x^\mu + \varepsilon \xi^\mu
+\]
+allora se la trasformazione è un'isometria si ha che, espandendo in serie di Taylor
+\[
+g'_{\rho \sigma}(x') = g_{\rho \sigma}(x') = g_{\rho \sigma}(x) + (\partial_\tau g_{\rho \sigma}(x) )\varepsilon \xi^\tau
+\]
+Sostituendo questo risultato nella trasformazione della metrica, al prim'ordine abbiamo che
+
+\begin{align*}
+	g_{\mu \nu} &= (\delta^\rho_\mu + \varepsilon\partial_\mu\xi^\rho) (\delta^\sigma_\nu + \varepsilon\partial_\nu\xi^\sigma)(g_{\rho \sigma} + (\partial_\tau g_{\rho \sigma} )\varepsilon \xi^\tau) \\
+	&= (\delta^\rho_\mu \delta^\sigma_\nu + \varepsilon(\delta^\sigma_\nu\partial_\mu\xi^\rho + \delta^\rho_\mu \partial_\nu \xi^\sigma ))(g_{\rho \sigma} + (\partial_\tau g_{\rho \sigma})\varepsilon\xi^\tau) \\
+	&= g_{\mu \nu} + \varepsilon((\partial_\tau g_{\mu \nu})\xi^\tau + g_{\nu \rho}\partial_\mu\xi^\rho + g_{\mu \sigma}\partial_\nu\xi^\sigma ) \\
+\end{align*}
+
+Allora
+\[
+\xi^\tau\partial_\tau g_{\mu \nu}  + g_{\nu \rho}\partial_\mu\xi^\rho + g_{\mu \sigma}\partial_\nu\xi^\sigma = 0
+\]
+
+Usando adesso Leibniz si ha che
+\[
+\partial_\mu(g_{\rho \nu}\xi^\rho) = \partial_\mu \xi_\nu = ((\partial_\mu g_{\rho \nu})\xi^\rho + g_{\rho \nu}\partial_\mu\xi^\rho)
+\]
+Quindi
+\[
+\xi^\tau\partial_\tau g_{\mu \nu} + \partial_\mu \xi_\nu - (\partial_\mu g_{\rho \nu})\xi^\rho +  + \partial_\nu \xi_\mu - (\partial_\nu g_{\sigma \mu})\xi^\sigma = 0 
+\]
+che possiamo riscrivere come, cambiando nome agli indici muti
+\[
+\xi^\tau(\partial_\tau g_{\mu \nu} - \partial_\mu g_{\tau \nu} - \partial_\nu g_{\tau \mu}) + \partial_\mu \xi_\nu + \partial_\nu \xi_\mu = 0
+\]
+Abbassiamo gli indici con la metrica $\xi^\tau = g^{\lambda \tau} \xi_\lambda$ ed otteniamo
+\[
+\partial_\mu \xi_\nu + \partial_\nu \xi_\mu - 2 \xi_\lambda \Gamma^\lambda_{\mu \nu} = 0
+\]
+o analogamente
+\[
+\boxed{
+D_\mu \xi_\nu + D_\nu \xi_\mu = 0
+}
+\]
+detta Equazione di Killing.
+\begin{defn}[Vettori di Killing]
+	I vettori che soddisfano l'equazione di Killing sono detti vettori di Killing e quindi individuano delle isometrie.
+\end{defn}
+
+\begin{defn}[Spazio massimamente simmetrico]
+	Uno spazio N dimensionale si dice massimamente simmetrico se il numero dei vettori di Killing è $\frac{N(N+1)}{2}$
+\end{defn}
+
+\begin{oss}
+	Gli spazi massimamente simmetrici sono completamente definiti da una metrica e da una curvatura k costante nello spazio.
+\end{oss}
+
+\marginpar{Q. ?}
+
+Possiamo scrivere i simboli di Christoffel come 
+\[
+\Gamma^\mu_{\nu \lambda} = k x^\mu g_{\lambda \nu}
+\]
+allora in assenza di campi gravitazionali 
+\[
+\frac{d^2 x^\mu}{d\tau^2} - k x^\mu = 0
+\]
+
+\begin{defn}[Tensore di Riemann]
+	\[
+	R^\mu_{~\nu \alpha \beta} = \partial_\alpha \Gamma^\mu_{\nu \beta} \partial_\beta \Gamma^\mu_{\nu \alpha} + \Gamma^\mu_{\alpha \lambda}\Gamma^\lambda_{\beta \nu} - \Gamma^\mu_{\beta \lambda}\Gamma^\lambda_{\alpha \nu}
+	\]
+\end{defn}
+e rispetta l'identità di Bianchi
+\[
+R^\mu_{~\nu \alpha \beta} + R^\mu_{~ \beta \nu \alpha } + R^\mu_{~\alpha \beta \nu  } = 0
+\]
+\begin{defn}[Tensore di Ricci]
+	\[
+	R_{\nu \beta} = R^\mu_{~\nu \mu \beta}
+	\]
+\end{defn}
+
+\begin{defn}[Curvatura scalare]
+	\[
+	R = R^\mu_\mu
+	\]
+\end{defn}
+\begin{defn}
+	\[
+	G_{\mu \nu} = R_{\mu \nu} - \frac12 g_{\mu \nu} R
+	\]
+\end{defn}
+Ricordiamo una utile proprietà
+\[
+D^\mu R_{\mu \nu} - \frac12 D_\nu R = 0
+\]
+da cui deriva che 
+\[
+D^\mu G_{\mu \nu} = 0
+\]
+\subsection{Dinamica}
+Studiamo adesso l'azione del campo gravitazionale $S_g$. Questa deve essere uno scalare e l'unico scalare fin'ora definito è R, allora possiamo costruire 
+\[
+\boxed{
+S_g \propto \int R \sqrt{-g}d^4x
+}
+\]
+con $ \sqrt{-g}d^4x$ intervallo invariante.
+\begin{oss}
+	La definizione di $S_g$ è a meno di una costante, infatti possiamo anche definire $S_g \propto \int (R - 2\Lambda) \sqrt{-g}d^4x$ da cui segue naturalmente il termine cosmologico.
+\end{oss}
+
+Per i campi di materia abbiamo invece un'azione del tipo
+\[
+S_m = \frac1c \int \Lagr_m \sqrt{-g}d^4x
+\]
+In assenza di campo gravitazionale
+\[
+\delta S_m = 0 \ra D_\alpha T_{\mu \nu} = 0
+\]
+cioè il tensore di energia-impulso si conserva.
+\\
+In presenza, invece, sia di un campo di materia che di un campo gravitazionale abbiamo che 
+\[
+\delta(S_m + S_g) = 0 \not\ra D^\mu T_{\mu \nu} = 0 
+\]
+Richiedendo poi $\delta(S_m + S_g) = 0$ otteniamo le equazioni di Einstein
+\[
+\boxed{
+R_{\mu \nu} - \frac12 g_{\mu \nu}R = 8\pi G T_{\mu \nu}
+}
+\]
+Usando il fatto che $R = -8 \pi G T,\, T = T^\mu_\mu$ possiamo riscriverle come
+\[
+R_{\mu \nu} = 8\pi G(T_{\mu \nu} - \frac12 g_{\mu \nu}T)
+\]
+
+\section{Cosmologia}
+Il principio cosmologico asserisce che l'universo è isotropo e omogeneo su larghe scale.
+\\
+In un sistema di questo tipo possiamo introdurre una metrica 
+\[
+ds^2 = -dt^2 + q^2(t) \tilde{g}_{ij} dx^i dx^j
+\]
+dove il tempo è fattorizzato nel fattore di scala $q(t)$ per isotropia e quindi $\tilde{g}$ è indipendente dal tempo.
+
+\section{Paradosso di Olbers o del cielo stellato}
+Per omogeneità ed isotropia, in ogni punto del cielo ci dovrebbe essere una stella, ma allora il flusso di stelle
+\[
+\Phi_S = \int_{0}^{\infty} \frac{L_S}{4 \pi r^2} n_S 4 \pi r^2 dr
+\]
+dove: \\
+$\Phi_S$ è il flusso di stelle \\
+$L_S $ è la luminosità della stella \\
+$n_S$ è la densità di stelle che assumiamo uniforme.\\
+Allora 
+\[
+\Phi_S = L_S n_S \int_{0}^{\infty} dr \to \infty
+\]
+Ci dovrebbe arrivare dunque una quantità di luce infinita.
+\\
+Olbers ipotizzò l'esistenza di polvere nel mezzo intergalattico (universo) che assorbisse la radiazione. Tuttavia la polvere si comporta come corpo nero quindi si porta in equilibrio termico con le stelle e riemette la stessa radiazione.
+\\
+Per risolvere il problema ricorriamo all'espansione dell'universo. Le stelle infatti si allontanano, quindi la luce che emettono subisce il redshift ed arriva a noi come luce nell'infrarosso, non nel visibile.
+
+\section{Metrica FRW}
+Consideriamo una sfera 
+\[
+x_1^2 + x_2^2 + x_3^2 = a^2
+\]
+immersa in uno spazio euclideo con metrica
+\[
+dl^2 = dx_1^2 + dx_2^2 + dx_3^2
+\]
+Abbiamo allora che 
+\[
+dx_3 = -\frac{x_1 dx_1 + x_2 dx_2}{\sqrt{a^2 - x_1^2 - x_2^2}}
+\]
+Sostituendo nella metrica otteniamo
+\[
+dl^2 = dx_1^2 + dx_2^2 + \frac{(x_1 dx_1 + x_2 dx_2)^2}{a^2 - x_1^2 - x_2^2} = d\vec{x}^2 + \frac{(\vec{x} d\vec{x})^2}{a^2 - \vec{x}^2}
+\]
+con $\vec{x} = (x_1, x_2)$ \\
+Analogamente immergendo uno spazio iperbolico 
+\[
+x_1^2 + x_2^2 - x_3^2 = a^2
+\]
+in uno spazio minkowskiano
+\[
+dl^2 = dx_1^2 + dx_2^2 - dx_3^2
+\]
+otteniamo
+\[
+dl^2 =  d\vec{x}^2 - \frac{(\vec{x} d\vec{x})^2}{a^2 + \vec{x}^2}
+\]
+Infine possiamo vedere uno spazio piatto come una sfera in cui $a \to \infty$.
+\\
+Ridefinendo allora $x' = x/a$ otteniamo
+\[
+dl^2 =  a^2( d\vec{x'}^2 + k \frac{(\vec{x'} d\vec{x'})^2}{1 - k \vec{x}'^2} )
+\]
+con 
+\[
+k = \begin{cases}
+	1,& \; \text{sfera} \\
+	0,& \; \text{piano} \\
+	-1,& \; \text{iperbole} \\
+\end{cases}
+\]
+Lavorando invece in coordinate cilindriche $(r', \theta, x_3)$ otteniamo per la sfera
+\[
+dl^2 = \frac{a^2 dr'^2}{a^2 - r'^2} + r'^2 d\theta^2
+\] 
+oppure riscalando il raggio con $r = r'/a$
+\[
+dl^2 = a^2(\frac{dr^2}{1 - r^2} + r^2 d\theta^2)
+\]
+Per una superficie iperbolica possiamo mandare $a \to ia$, mentre per una superficie piatta $a \to \infty$. Quindi in forma compatta, usando il raggio riscalato
+\[
+dl^2 = a^2(\frac{dr^2}{1 - k r^2} + r^2 d\theta^2)
+\]
+Analogamente in coordinate sferiche $(\chi, \theta , \varphi), \; \chi \in [0, \pi]$
+otteniamo
+\[
+dl^2 = a^2 [d \chi^2 + f_k^2 d \Omega^2]
+\]
+con 
+\marginpar{Per isotropia tutte le dipendenze dal tempo devono essere uguali altrimenti l'universo si deformerebbe}
+\[
+f_k = \begin{cases}
+	\sin \chi, & k=1 \\
+	 \chi, & k=0 \\
+	\sinh \chi, & k=-1 \\
+\end{cases}
+\]
+
+Otteniamo così la metrica di Friedmann-Robertson-Walker (FRW)
+\[
+\boxed{
+	ds^2 = -c^2 dt^2 + dl^2 = -c^2 dt^2 + a^2(t)\bigg\{\frac{dr^2}{1 - kr^2} + r^2 d\Omega^2\bigg\}
+}
+\]
+Riscalando il tempo con $d\eta = \frac{c}{a(t)} dt$ otteniamo 
+\[
+ds^2 = a^2(\eta) \bigg\{d\eta^2 + \frac{dr^2}{1 - kr^2} + r^2 d\Omega^2 \bigg\}
+\]
+dove $\eta$ è detto tempo conforme.
+\\
+Calcoliamo adesso i simboli di Christoffel per la metrica FRW ricordando la definizione data in precedenza. Gli unici non nulli sono
+\marginpar{Abbiamo usato che $\partial_i g_{\mu \nu} = 0 \; \forall \mu, \nu$, $g^{00} = -1$, $g_{ij} = a^2 \gamma_{ij}$ dove $\gamma$ è la parte spaziale della metrica indipendente dal tempo.}
+\[
+\Gamma^0_{ij} = \frac12 g^{00} \bigg[\partial_i g_{0j} + \partial_j g_{0i} - \partial_0 g_{ij}\bigg] = -\frac12 g^{00} \partial_0 g_{ij} = a \dot{a} \gamma_{ij} = \frac{\dot{a}}{a}g_{ij}
+\]
+\marginpar{Abbiamo usato che $g^{il} = \frac{1}{a^2}\gamma^{il}$, che si ricava usando la relazione $g^{il}g_{lj} = \delta^i_j$}
+\[
+\Gamma^i_{0j} = \frac12 g^{il} \bigg[\partial_j g_{l0} + \partial_0 g_{lj} - \partial_l g_{0j} \bigg] = \frac12 g^{il} \partial_0 g_{lj} = \frac{\dot{a}}{a} \delta^i_j
+\]
+\begin{ex}
+	In questa metrica, una particella inizialmente a riposo rimane ferma, infatti scrivendo l'equazione geodetica
+	\[
+	\frac{d^2 x^i}{d\tau^2} = -\Gamma^i_{00} \frac{dx^0}{d\tau} \frac{dx^0}{d\tau} = 0
+	\]
+	poichè sia $\Gamma^i_{00}$ che $\frac{dx^i}{d\tau}$ sono nulli.
+\end{ex}
+
+\begin{ex}
+	Calcoliamo la distanza propria tra due punti nella metrica FRW. Per arbitrarietà del sistema di riferimento sotto rotazioni e traslazioni, possiamo ricondurre il problema al caso unidimensionale e quindi calcolare la distanza tra un punto nell'origine ed uno a distanza $r_1$. La distanza propria $d(r, t)$ è allora
+	\[
+	d(r, t) = \int_0^{r_1} dl(r) = \int_0^{r_1} \frac{a(t)}{\sqrt{1 - k r^2}} dr = a(t) \begin{cases}
+		\arcsin(r_1),& k=1 \\
+		r_1,& k=0 \\
+		\text{arcsinh}(r_1),& k=-1 \\
+	\end{cases}
+	\]
+	Quindi i punti sono fermi, ma la loro distanza cambia nel tempo.
+\end{ex}
+
+Introduciamo adesso il redshift cosmologico.
+\\
+Consideriamo una particella in moto e prendiamo il sistema di riferimento in modo tale che la particella sia in prossimità dell'origine, cioè vogliamo che $\gamma_{ij} = \delta_{ij} + o(x^2)$. Questo implica che $\Gamma^i_{jl} \propto g^i_{jl} \simeq 0$. Allora
+\marginpar{Il 2 è dovuto al fatto che dobbiamo considerare anche $\Gamma^i{j0}$}
+\[
+\frac{d^2 x^i}{d\tau^2} = -2 \Gamma^i_{0j} \frac{dx^j}{d\tau} \frac{dx^0}{d\tau} = -2 \frac{\dot{a}}{a} \frac{dx^i}{d\tau} \frac{dx^0}{d\tau}
+\]
+Se moltiplichiamo a destra e a sinistra per $\frac{d\tau}{dt}$ otteniamo
+\marginpar{$\frac{dx^0}{dt} = c = 1$ in unità naturali}
+\[
+\frac{d}{dt}\bigg(\frac{dx^i}{d\tau}\bigg) = -2 \frac{\dot{a}}{a} \frac{dx^i}{d\tau}\frac{dx^0}{dt} = -\frac{2}{a} \frac{da}{dt} \frac{dx^i}{d\tau}
+\]
+quindi 
+\[
+\frac{dx^i}{d\tau} \propto \frac{1}{a^2}
+\]
+La quantità di moto è poi
+\[
+p^2 = p_i p^i = m^2 u_i u^i = m^2 g_{ij} \frac{dx^i}{d\tau} \frac{dx^j}{d\tau} \propto a^2 \frac{1}{a^2} \frac{1}{a^2} \propto \frac{1}{a^2}
+\]
+Tuttavia  $p$ è anche $p = \frac{\hbar}{\lambda}$ allora $\lambda \propto a$.
+\begin{defn}[Redshift]
+	Definiamo il redshift z come $z = \frac{\lambda_0 - \lambda}{\lambda} = \frac{\lambda_0}{\lambda}$
+\end{defn}
+
+Si ha allora che 
+\[
+\frac{\lambda}{\lambda_0} = \frac{1}{1 + z} = \frac{a(t)}{a(t_0)}
+\]
+Per parametrizzare il tempo in cosmologia possiamo utilizzare allora il redshift.
+\marginpar{$H_0 = 100 h \frac{km}{s\cdot Mpc} \sim 75 \frac{km}{s\cdot Mpc}$}
+\begin{defn}[Raggio di Hubble]
+	$R_H = \frac{c}{H_0}$ è la distanza massima oltre la quale non può arrivare nessun segnale.
+\end{defn}
+
+\section{Legge di Hubble- Le Maitre}
+Espandiamo $a(t)$ in serie di Taylor attorno al tempo attuale $t_0$
+\marginpar{t: tempo di emissione \\ $t_0$: tempo attuale o di osservazione}
+\[
+a(t) = a(t_0) \bigg[1 + \frac{\dot{a}}{a} (t - t_0) \bigg]
+\]
+Lo sviluppo è valido se $t -  t_0 \ll H_0^{-1}$. Se scriviamo $a(t)$ usando il redshift otteniamo
+\[
+1 + z = \frac{a(t_0)}{a(t)} = \frac{1}{[1 + H_0 (t - t_0) } = 1 + H_0(t - t_0)
+\]
+\[
+\boxed{
+\ra z =  H_0(t - t_0) = H_0 d
+}
+\]
+che è la Legge di Hubble-Le Maitre.\\
+Ci chiediamo cosa accada alla densità di particelle n nella metrica FRW.\\
+Per isotropia $<v^i> = $(media spaziale) altrimenti ci sarebbe una corrente di particelle in una certa direzione. Allora una qualsiasi corrente $J^\mu = n u^\mu$ avrà $J^i = 0$
+\marginpar{$u^\mu$: 4-velocità mediata }
+In generale la 4-corrente è conservata, cioè
+\[
+D_\mu J^\mu = 0 = \partial_\mu J^\mu + \Gamma^\mu_{\mu \nu}  J^\nu = \partial_0 J^0 + \Gamma^i_{i0}J^0
+\]
+\[
+\ra \partial_0 J^0 = - 3\frac{\dot{a}}{a} J^0 \ra \partial_0 n = -3 \frac{\dot{a}}{a}n \ra \frac{dn}{n} = - 3 \frac{da}{a}
+\]
+Quindi
+\[
+n(t) = n(0) \bigg(\frac{a(0)}{a(t)}\bigg)^3
+\]
+cioè se $a(t)$ aumenta, $n(t)$ diminuisce.
+
+\section{Tensore energia-impulso}
+Al fine di rispettare il principio cosmologico, ogni fluido deve essere perfetto, cioè deve apparire, nel sistema comovente, omogeneo e isotropo. Questa condizione si traduce nella scelta di un tensore energia-impulso nel sistema comovente del tipo
+
+\[
+T_{\mu \nu} = \text{diag}\{\rho, p, p, p\}
+\]
+\marginpar{$\rho$: densità di energia \\ p: pressione}
+che possiamo scrivere nella forma
+\[
+\boxed{
+T_{\mu \nu} = (\rho + p)u_\mu u_\nu + p g_{\mu \nu}
+}
+\]
+la quale è esplicitamente covariante.
+\begin{prop}
+	\[
+	T^\mu_\mu = 3p - \rho \equiv T
+	\]
+	\[
+	D^\mu T_{\mu \nu} = 0
+	\]
+\end{prop}
+
+Dalla conservazione di $T_{\mu \nu}$ nella metrica FRW otteniamo l'equazione di conservazione dell'energia.
+\begin{proof}
+	\begin{align*}
+	D_\mu T^{\mu 0} = 0 &= \partial_\mu T^{\mu 0} + \Gamma^0_{\mu \lambda} T^{\mu \lambda} + \Gamma^\mu_{0 \lambda} T^{\lambda 0} \\
+	&= \partial_0 T^{00} + \Gamma^0_{ij} T^{ij} + \Gamma^i_{i0} T^{00} \\
+	&= \partial_t \rho + 3\frac{\dot{a}}{a}(\rho + p) = 0 \\
+	\end{align*}
+\end{proof}
+L'equazione di conservazione è dunque
+\[
+	\boxed{
+	\frac{\partial \rho}{\partial t} + 3\frac{\dot{a}}{a}(\rho + p) = 0 
+	}
+\]
+L'espressione della conservazione del tensore energia-impulso è covariante, quindi le leggi di conservazione valgono in tutti i sistemi di riferimento.
+
+\section{Equazioni di Friedmann}
+Se partiamo dalle equazioni di Einstein
+\[
+R_{\mu \nu} = 8 \pi G (T_{\mu \nu} - \frac12 g_{\mu \nu} T)
+\]
+e calcoliamo il tensore di Ricci per la metrica FRW otteniamo le equazioni di Friedmann
+\[
+\boxed{
+	\frac{\ddot{a}}{a} = - \frac{4 \pi G}{3} (\rho + 3p)
+}
+\]
+\marginpar{La seconda equazione è ottenuta sviluppando in un intorno di $x \simeq 0$ tuttavia, per covarianza, le equazioni sono valide globalmente}
+\[
+\boxed{
+	k + \dot{a}^2 = \frac{8 \pi G}{3} a^2 \rho
+}
+\]
+
+\begin{oss}
+	Derivando rispetto al tempo la seconda equazione di Friedmann ritroviamo la conservazione del tensore energia-impulso
+\end{oss}
+Se supponiamo adesso un'equazione di stato per il fluido del tipo $p = w \rho$, sostituendo nell'equazione per la conservazione dell'energia otteniamo
+\[
+\frac{d \rho}{\rho} = -3(1 + w)\frac{da}{a} \\
+\ra \rho \propto a^{-3(1 + w)}
+\]
+Possiamo così distinguere 3 casi importanti
+\[
+w = 0: \qquad \rho \propto a^{-3} \qquad \text{Materia non relativistica}
+\]
+\[
+w = \frac13 : \qquad \rho \propto a^{-4} \qquad \text{Radiazione}
+\]
+\[
+w = -1: \qquad \rho = c.te \qquad \text{Costante cosmologica}
+\]
+Integrando, poi, la seconda equazione di Friedmann a $k = 0$ possiamo ottenere la dipendenza temporale di a e quindi di $\rho$.
+\[
+\boxed{
+a^{\frac32 (1 + w)} \propto t
+}
+\]
+quindi nei vari casi abbiamo
+\[
+w = 0: \qquad a \propto t^{\frac23}
+\]
+\[
+w = \frac13 : \qquad a \propto t^{\frac12}
+\]
+\marginpar{Nel caso della costante cosmologica l'integrale non è quello di un polinomio}
+\[
+w = -1: \qquad a \propto e^{\alpha t}
+\]
+\begin{oss}
+	$w = -\frac13 $ è la linea di separazione tra l'universo che accelera e quello che decelera.
+\end{oss}
+
+\section{Universo di Einstein}
+Consideriamo le equazioni di Einstein con il termine cosmologico
+\[
+R_{\mu \nu}  - \frac12 g_{\mu \nu} R + \Lambda g_{\mu \nu} = 8 \pi G T_{\mu \nu}
+\]
+Possiamo tuttavia condensare il termine cosmologico nel tensore energia impulso e riscrivere quest'ultimo come
+\[
+\tilde{T}_{\mu \nu} = T_{\mu \nu} - \frac{\Lambda}{8 \pi G} g_{\mu \nu}
+\]
+Quindi
+\[
+R_{\mu \nu} - \frac12 g_{\mu \nu} R = 8 \pi G \tilde{T}_{\mu \nu}
+\]
+Possiamo inoltre interpretare il termine cosmologico come un fluido con $w = -1$.\\
+Einstein suppone un universo statico, cioè $\dot{a} = \ddot{a} = 0$. Andando a sostituire nelle equazioni di Friedmann troviamo
+\[
+\tilde{\rho} = - 3 \tilde{p}
+\]
+\[
+\tilde{\rho} = \frac{3k}{8 \pi G a^2} 
+\]
+Per un universo dominato dalla materia($w = 0$)
+\[
+\tilde{p} = 0 - \frac{\Lambda}{8 \pi G} = -\frac{k}{8 \pi G a^2} 
+\]
+quindi 
+\[
+\Lambda = \frac{k}{a^2}
+\]
+Chiamiamo $a_E = \frac{1}{\sqrt{\Lambda}}$ raggio di Einstein, dove abbiamo posto $k = 1$.
+\marginpar{$k=1$ dalla seconda equazione di Friedmann} \\
+La soluzione data da Einstein è però instabile, infatti, perturbando di poco $a_E \to a_E + \delta a$ osserviamo che l'equazione di Friedmann diventa
+\[
+\delta \ddot{a} = -\frac{4 \pi G}{3} a (\delta \tilde{\rho} + 3 \delta \tilde{p})
+\]
+Ricordiamo adesso che $\tilde{p} = -\frac{\Lambda}{8 \pi G}$, $\tilde{\rho} = \rho_M + \frac{\Lambda}{8 \pi G}$, $\rho_M \propto \frac{1}{a^3}$. Quindi $\delta \tilde{p} = 0, \; \delta \tilde{\rho} = \delta \rho_M \propto -\delta a$. Allora
+\[
+\delta \ddot{a} \propto \delta a
+\]
+Quindi per una piccola perturbazione, a esplode.
+
+\section{Universo di de Sitter}
+Consideriamo un universo vuoto, in cui quindi gli unici contributi al tensore energia impulso sono dovuti alla costante cosmologica.
+\[
+\tilde{\rho} = -\tilde{p} = \frac{\Lambda}{8 \pi G}
+\]
+Supponendo $k=0$ dalla seconda equazione di Friedmann otteniamo
+\[
+\frac{\dot{a}}{a} = \sqrt{\frac{\Lambda}{3}}
+\]
+quindi un'accelerazione eterna.
+
+\section{Densità critica e curvatura}
+Ricordiamo la seconda equazione di Friedmann
+\[
+(\frac{\dot{a}}{a})^2 + \frac{k}{a^2} = \frac{8 \pi G}{3} \rho
+\]
+Se definiamo
+\marginpar{al tempo attuale $\rho_{crit}$ vale $1.05\cdot 10^4 h^2 \frac{eV}{cm^2}$} 
+\[
+\rho_{crit} = \frac{3 H^2}{8 \pi G}
+\]
+Allora possiamo riscrivere l'equazione come
+\[
+\frac{k}{a H^2} = \frac{8 \pi G}{3 H^2}\rho - (\frac{\dot{a}}{a})^2 \frac{1}{H^2}
+\]
+\marginpar{$\Omega = \frac{\rho}{\rho_{crit}}$ \\ $\Omega_k = -\frac{k}{a H^2}$}
+\[
+\ra \Omega - 1 = -\Omega_k
+\]
+Possiamo allora misurare la densità di materia $\Omega$ per determinare la curvatura k. \\
+Analogamente possiamo definire $\Omega_M = \frac{\rho_M}{\rho_{crit}},\, \Omega_R = \frac{\rho_R}{\rho_{crit}}, \, \Omega_\Lambda = \frac{\rho_\Lambda}{\rho_{crit}}$
+\marginpar{$\Omega_M \propto a^{-3}$ \\ $\Omega_R \propto a^{-4}$ \\ $\Omega_\Lambda = c.te$}.\\
+In generale avremo che $\rho = \sum_i \rho_i$, allora
+\[
+\rho = \frac{3 H^2}{8 \pi G} \{\Omega_\Lambda + \Omega_M + \Omega_R \}
+\]
+Sostituendo $\rho$ otteniamo la relazione di consistenza
+\[
+\Omega_M +\Omega_R +\Omega_\Lambda +\Omega_k = 1
+\]
+Definiamo poi il parametro di accelerazione
+\marginpar{$q > 0$: decelerazione \\ $q<0$ : accelerazione}
+\[
+q = -\frac{\ddot{a}}{a H^2} = -\frac{\ddot{a} a}{\dot{a}^2}
+\]
+In questo modo possiamo riscrivere la prima equazione di Friedmann dividendo entrambi i membri per $H^2$
+\[
+q = \frac{4 \pi G}{3 H^2} \rho (1 + 3w)
+\]
+\marginpar{$w > -\frac13$: decelerazione \\ $w < -\frac13$: accelerazione}
+\[
+\ra q = \frac12 \Omega (1 + 3w)
+\]
+\begin{oss}[Problema della costante cosmologica]
+	La densità di energia di punto zero è 
+	\[
+	<\rho>_{p0} = \int_{0}^{k_{max}} \frac12 k \frac{d^3 k}{(2 \pi )^3} = \frac{k_{max}^4}{16 \pi^2}
+	\]
+	dove $k_max$ è il cutoff ultravioletto della teoria che stiamo considerando.\\
+	Nel caso della gravità quantistica $k_{max} \sim 10^{19} \, GeV \ra <\rho>_{p0} \sim 10^{73} \, GeV^4$\\
+	Per la QCD $k_{max} \sim 100 \, MeV \ra <\rho>_{p0} \sim 10^{-6}\, GeV^4$\\
+	Per il modello standard $<\rho>_{p0} \sim 10^{6}\, GeV^4$.
+\end{oss}
+
+Possiamo scrivere $\Omega_M$ (ed analogamente le altre $\Omega$) come
+\[
+\Omega_M = \frac{\rho_M}{\rho_{crit}} = \frac{1}{\rho_{crit}} \rho_{M, 0} \bigg(\frac{a_0}{a(t)} \bigg)^3 =  \frac{\rho_{crit, 0}}{\rho_{crit}} \frac{\rho_{M, 0}}{\rho_{crit, 0}} \bigg(\frac{a_0}{a(t)} \bigg)^3 = \frac{\rho_{crit, 0}}{\rho_{crit}} \Omega_{M, 0}  \bigg(\frac{a_0}{a(t)} \bigg)^3
+\]
+Allora possiamo riscrivere anche l'espressione per $\rho$
+\[
+\boxed{
+\rho = \rho_{crit, 0} \bigg[\Omega_\Lambda +  \Omega_{M, 0}  \bigg(\frac{a_0}{a(t)} \bigg)^3 +  \Omega_{R, 0}  \bigg(\frac{a_0}{a(t)} \bigg)^4 \bigg]
+}
+\]
+Riprendiamo poi la seconda equazione di Friedmann e dividiamo tutto per $a_0^2 H_0^2$. Otteniamo allora
+\[
+\bigg(\frac{\dot{a}}{a_0}\bigg)\frac{1}{H_0^2} + \frac{k}{a_0^2 H_0^2} = \bigg(\frac{a}{a_0}\bigg)^2 \bigg[\Omega_\Lambda +  \Omega_{M, 0}  \bigg(\frac{a_0}{a(t)} \bigg)^3 +  \Omega_{R, 0}  \bigg(\frac{a_0}{a(t)} \bigg)^4 \bigg]
+\]
+Poniamo $x = \frac{a(t)}{a_0} = \frac{1}{1 + z}$ e $k=0$ ed otteniamo
+\[\boxed{
+\bigg(\frac{H}{H_0}\bigg)^2 = \bigg[\Omega_\Lambda +  \Omega_{M, 0}  x^{-3} +  \Omega_{R, 0}  x^{-4} \bigg]
+}
+\]
+Chiamiamo
+\[
+\boxed{
+	E^2(x) = \Omega_\Lambda +  \Omega_{M, 0}  x^{-3} +  \Omega_{R, 0}  x^{-4} 
+}
+\]
+allora
+\[
+\frac{1}{a} \frac{da}{dt} = H_0 E(x)
+\]
+Cambiando variabile e ricordando che $dx = \frac{1}{a_0} da$ otteniamo che
+\[
+dt = \frac{dx}{H_0 E(x) x}
+\]
+Quindi il tempo dal Big Bang (tempo 0) ad un certo $x$ si calcola come
+\[
+\boxed{
+	t(x) = \frac{1}{H_0}\int_{0}^{x} \frac{1}{x E(x)}\,dx
+}
+\]
+L'età dell'universo sarà allora
+\[
+t_0= \frac{1}{H_0}\int_{0}^{1} \frac{1}{x E(x)}\,dx
+\]
+\begin{ex}
+	Calcoliamo l'età dell'universo nel caso di quello di Einstein - de Sitter
+	\[
+	\Omega_{M, 0}= 1, \Omega_{R, 0} = 0, \Omega_\Lambda = 0
+	\]
+	\[
+	t_0 = \frac{1}{H_0} \int_{0}^{1} \frac{dx}{x \cdot x^{-\frac32}} = \frac23 H_0^{-1} = 7\cdot 10^9 h^{-1} yrs = 9.5 \cdot 10^9 yrs
+	\]
+	Tuttavia confrontando questo valore con la vita media dei radionuclei o delle nane bianche si osserva che l'età è troppo bassa.\\
+	La luminosità minima delle nane bianche è $3\cdot10^{-5} L_{solare}$, allora queste stelle non hanno avuto abbastanza tempo per raffreddarsi, secondo il modello di Einstein. Dalla luminosità di queste stelle si è infatti stimato che $t_0 = 10 \pm 2\, Gy$, mentre dalla CMB si stima $t_0 = 13.7 \pm 0.2\, Gy$
+\end{ex}
+\section{Modello $\Lambda$CDM}
+Nel modello $\Lambda$CDM abbiamo che $\Omega_\Lambda + \Omega_{M, 0} = 1$ quindi
+\marginpar{Inserire immagine}
+\[
+t_0 = \frac{1}{H_0} \int_0^1 \frac{dx}{x(\Omega_\Lambda + \Omega_{M, 0} x^{-3})^{\frac12}} = \frac23 \frac{1}{H_0 \Omega_\Lambda^\frac12 } \ln\bigg(\frac{1 + \Omega_\Lambda^\frac12}{\sqrt{1 - \Omega_\Lambda}} \bigg)
+\]
+
+\section{Orizzonte di Particella}
+Consideriamo adesso dei fotoni ($ds^2=0$) allora dalla metrica di Friedmann otteniamo che 
+\[
+\frac{dt}{a(t)} = \frac{dr}{\sqrt{1 - kr^2}}
+\]
+Se integriamo nel tempo tra 0 e $t_0$ questo corrisponderà ad integrare nel raggio tra 0 ed $r_{max}$.\\
+Nel caso di cosmologie standard, cioè dominate da radiazione e materia, $a(t) \propto t^n, \, n= \frac23 \frac{1}{1 + w}$. L'integrale temporale e di conseguenza quello spaziale convergono se $n<1$ cioè se $w > -\frac13$, quindi per un universo che decelera. \marginpar{$\rho + 3p > 0$ è detta Strong Energy Condition}
+\\
+La distanza fisica d è poi
+\[
+d(t) = a(t) \int_{0}^{r(t)} \frac{dr'}{\sqrt{1 - kr'^2}} = \int_{0}^{t}dt' = \int_{0}^{x(t)} \frac{dx}{x E(x) H_0} 
+\]
+Se integriamo nel tempo tra 0 ed 1 troviamo quindi la distanza fisica massima che definisce la massima distanza a cui si può trovare una particella ed è detta orizzonte di particella.
+
+\section{Orizzonte degli eventi}
+Esistono tuttavia delle zone dell'universo da cui non possiamo ricevere informazioni, dobbiamo perciò riconsiderare gli estremi di integrazione
+\[
+\int_{t_*}^{\infty} \frac{dt}{a(t)} = \int_{0}^{r_*} \frac{dr}{\sqrt{1 - kr^2}}
+\]
+Se $r > r_*$ allora l'evento nella posizione r non sarà mai osservabile.\\
+$r_*$ è detto orizzonte degli eventi.
+
+\begin{ex}
+	Consideriamo l'universo di de Sitter, quindi $a(t) = a_0 e^{Ht}, \, k=0$ allora
+	\[
+	\frac{1}{a_0} \int_{t_*}^{\infty} \frac{dt}{e^{Ht}} = \int_{0}^{r_*}dr = r_*
+	\]
+	Allora
+	\[
+	r_* = \frac{1}{a_0 H}e^{-Ht_*}
+	\]
+\end{ex}
+Se $a \propto t^n$, l'integrale non converge per $w > -\frac13$ quindi non c'è orizzonte degli eventi.
+
+\section{Distanza di Luminosità}
+Ricordiamo che 
+\[
+l = \frac{L}{4 \pi d^2}
+\]
+nello spazio euclideo. \\ 
+Tuttavia in presenza dell'espansione dell'universo l'espressione cambia.
+\\
+Per effetto geometrico 
+\[
+\frac{1}{d^2} \to \frac{1}{a^2(t_0) r_s^2}
+\]
+con $t_0$ tempo attuale ed $r_s$ raggio della sorgente. \\
+C'è poi un fattore $\frac{1}{1 + z}$ dovuto al redshift. \\
+Infine dobbiamo tener conto anche della dilatazione temporale: l'intervallo di tempo tra l'emissione di due fotoni è
+\[
+\frac{\Delta t_0}{\Delta t_s} = \frac{a(t_s)}{a(t_0)} = \frac{1}{1 + z}
+\]
+Combinando questi 3 effetti otteniamo la distanza di luminosità $d_L = a(t_0) r_s (1 + z)$ t.c. 
+\[
+l = \frac{L}{4 \pi d_L^2}
+\] 
+
+\section{Legge di Hubble al second'ordine}
+\[
+z = -1 + \frac{a(t_0)}{a(t_s)} \simeq -1 + \frac{1}{1 + H_0(t_s - t_0) - \frac12 H_0^2 q_0 (t_s - t_0)^2} 
+\]
+\[
+\ra z \simeq -1 + 
+ \bigg[
+ 	 \bigg(
+ 	 1 + H_0 (t_0 - t_s) + \frac12 H_0^2 q_0 (t_0 - t_s)^2 
+ 	 \bigg)
+	  + H_0^2 (t_0 - t_s)^2 
+\bigg] = H_0 (t_0 - t_s) + \frac12 H_0^2 (q_0 + 2) (t_0 - t_s)^2
+\]
+Invertendo l'equazione otteniamo che
+\[
+ H_0 (t_0 - t_s) = z - \frac12 (q_0 + 2)z^2
+\]
+Ricordiamo adesso che 
+\[
+f_k \equiv \int_{0}^{r_s} \frac{dr}{\sqrt{1 - kr^2}} \underbrace{\simeq r_s}_{\text{al prim'ordine }}
+\]
+e che
+\[
+\int_{t_s}^{t_0} \frac{dt}{a(t)} = \int_{0}^{r_s} \frac{dr}{\sqrt{1 - kr^2}} \simeq r_s
+\]
+Posso scrivere il LHS come
+\marginpar{Sviluppando al prim'ordine $\frac{a_0}{a(t)}$}
+\[
+\int_{t_s}^{t_0} \frac{dt}{a(t)} = \frac{1}{a_0} \int_{t_s}^{t_0} \frac{a_0}{a(t)}\,dt = \frac{1}{a_0} \int_{t_s}^{t_0}  (1 + H_0 (t_0 - t)) = \frac{1}{a_0} \bigg[(t_0 - t_s) + \frac{H_0}{2} (t_0 - t_s)^2 \bigg]
+\]
+Quindi
+\[
+r_s = \frac{1}{a_0} \int_{t_s}^{t_0}  (1 + H_0 (t_0 - t)) = \frac{1}{a_0} \bigg[(t_0 - t_s) + \frac{H_0}{2} (t_0 - t_s)^2 \bigg]
+\]
+In precedenza avevamo trovato che
+\[
+t_0 - t_s = \frac{1}{H_0} (z - (1+ \frac{q_0}{2}) z^2)
+\]
+Allora
+\[
+d_L^2 = a^2(t_0) r_s^2 (1 + z)^2 = a_0^2  \frac{1}{a_0^2 H_0^2} \bigg( z - \frac{z^2}{2} (1 + q_0)\bigg)^2(1 + z)^2
+\]
+\[
+\ra H_0 d_L = \bigg( z - \frac{z^2}{2} (1 + q_0)\bigg)(1 + z)
+\]
+che è la legge di Hubble al secondo ordine.
+
+\section{Distanza di diametro angolare}
+Vogliamo descrivere una certa area dello spazio in coordinate sferiche. Nel caso euclideo avremmo, come è noto, $ds^2 = d^2 d\Omega^2$, tuttavia nella metrica FRW questa espressione diventerà $ds^2 = d_A^2 d\Omega^2$, con $ds^2(r_s) = f_k(r_s)^2 a^2(t_s) d\Omega^2$. Possiamo allora ricavare $d_A^2$ ad una distanza pari ad $r_s$ invertendo l'equazione. Otteniamo così
+\[
+d_A^2 = \frac{ds^2}{d\Omega^2} = f_k^2(r_s) a^2(t_s)
+\]
+che per $k=0$ si riduce a 
+\[
+d_A^2 = r_s^2 a^2(t_s) = \frac{r_s^2 a^2(t_0)}{(1 + z)^2}
+\]
+Allora
+\[
+\frac{d_A}{d_L} = \frac{1}{(1+ z)^2}
+\]
+\[
+H_0 d_A \simeq z - \frac12 (3 + q_0)z^2
+\]
+dove abbiamo utilizzato lo sviluppo al prim'ordine di $\frac{1}{1 + z}$
+\\
+Definendo 
+\marginpar{S è l'area, $\mathcal{L} = \frac{L}{S}$ è la luminosità assoluta per unità di area}
+\[
+B = \frac{l}{\Omega} = \frac{L}{4 \pi d_L^2} \cdot \frac{d_A^2}{S}
+\]
+superficie di brillanza, otteniamo che
+\[
+B = \frac{\mathcal{L}}{4 \pi} \bigg(\frac{d_A}{d_L}\bigg)^2 \propto \frac{1}{(1 + z)^4}
+\]
+Se, tuttavia, il redshift fosse dovuto ad un qualche tipo di polvere, avremmo
+\[
+d_L = d(1 + z)
+\]
+poichè non ci sarebbe alcun effetto di dilatazione temporale. Quindi
+\[
+\frac{d_A}{d_L}  \propto\frac{1}{1 + z}
+\]
+cioè
+\[
+B \propto \frac{1}{(1 + z)^2}
+\]
+Calcoliamo adesso $d_L$ in funzione della composizione dell'universo. Sappiamo che 
+\[
+dt = \frac{1}{H_0} \frac{dx}{x E(x)}
+\]
+e per la luce
+\[
+\int_{t(z)}^{t_0} \frac{dt'}{a(t')} = \int_{0}^{r(z)} \frac{dr'}{\sqrt{1 - kr'^2}}
+\]
+\marginpar{Ricordiamo che $x = \frac{a(t)}{a_0}$}
+\[
+\ra r(z) = S\bigg[ \int_{t(z)}^{t_0} \frac{dt'}{a(t')} \bigg] = S\bigg[\frac{1}{a_0 H_0} \int_{\frac{1}{1 + z}}^{1} \frac{dx}{x^2 E(x)}\bigg]
+\]
+con 
+\[
+S[y] = \begin{cases}
+	\sin(y),& k=1 \\
+	y,& k=0 \\
+	\sinh(y),& k=-1 \\
+\end{cases}
+\]
+Usando il fatto che $\Omega_k = - \frac{k}{a_0^2 H_0^2}$ si ha che
+\marginpar{Ricordiamo che $\sinh(ix) = i \sin(x)$}
+\[
+a_0 r(z) = \frac{1}{H_0 \Omega_k} \sinh\bigg(\sqrt{\Omega_k}\int_{\frac{1}{1 + z}}^{1} \frac{dx}{x^2 E(x)}  \bigg)
+\]
+da cui possiamo ricavare $d_L(z)$ usando la relazione
+\marginpar{Inserire immagine}
+\[
+d_L(z) = a_0 r(z) (1 + z)
+\] 
+\section{Ricerca di candele standard}
+La relazione di Tully-Fisher ci dice che: \\
+Per galassie a spirale
+\[
+L \propto v_{rot}^4
+\]
+Per galassie ellittiche
+\[
+L \propto \Delta v_{rot}^4
+\]
+Alternativamente possiamo usare le supernove di tipo 1a per determinare le candele standard. Le supernove di tipo 1a sono infatti un sistema binario costituito da una nana bianca ed un'altra stella che viene assorbita dalla NB. Quando la massa della NB supera la massa di Chandrasekhar ($1.4$ masse solari), il sistema collassa producendo radiazioni termo-nucleari esplosive e dando origine ad una supernova.\\
+\marginpar{In forma luminosa l'energia delle supernove è di circa $10^{51}$ erg}
+Studiando le curve di luce $l(t$) delle supernove possiamo determinare $L(t)$.
+
+\section{Magnitudine}
+\begin{defn}[Magnitudine]
+	Definiamo la magnitudine apparente o relativa come
+	\[
+	m = -2.5 \log\bigg(\frac{l}{L_\odot}\bigg) + c
+	\]
+	La magnitudine assoluta è poi la magnitudine relativa calcolata alla distanza di 10 pc, cioè
+	\[
+	M = -2.5 \log(L) + c
+	\]
+	\[
+	\mu := M - m = 5 \log\bigg(\frac{d_L}{10 \, pc} \bigg)
+	\]
+\end{defn}
+
+Se chiamiamo adesso $z_\Lambda$ il momento in cui $\Omega_\Lambda$ diventa dominante rispetto a $\Omega_M$ vediamo che $z_\Lambda$ risolve 
+\[
+\Omega_\Lambda = \Omega_{M, 0} (1 + z_\Lambda)^3
+\]
+\marginpar{$\Omega_\Lambda = 0.25$ \\ $\Omega_{M, 0} = 0.75$}
+\[
+\ra z_\Lambda = 0.44
+\]
+\marginpar{?}
+Questo viene detto problema della coincidenza cosmica.
+
+\section{Natura energia oscura}
+L'energia oscura è un fluido a densità negativa di cui non si conosce la natura. Vediamo alcune possibili soluzioni a questo problema.\\
+\begin{enumerate}
+	\item Possiamo introdurre un nuovo tipo di materia come ad esempio un campo scalare con $w < -\frac13$. Se la densità di energia dipende dal tempo, cioè questo termine ha una dinamica, viene chiamato \textit{quintessenza}.
+	\item Possiamo modificare la relatività generale, in particolar modo l'azione
+	\marginpar{Se la correzione esiste deve essere molto piccola in quanto la RG è molto precisa}
+	\[
+	S = \frac{1}{16 \pi G} \int d^4 x\, \sqrt{-g}F(\varphi) R
+	\]
+	con $\varphi$ campo scalare. Alternativamente possiamo introdurre uno schermaggio della gravità che si ottiene introducendo un termine di massa per i gravitoni.
+\end{enumerate}
+La quintessenza è un campo scalare Q con azione
+\[
+S = \frac12 \partial_\mu Q \partial^\mu Q + V(Q)
+\]
+Il suo tensore energia impulso sarà dunque
+\[
+T^{\mu \nu} = \partial^\mu Q \partial^\nu Q - g^{\mu \nu}\bigg(\frac12 \partial_\alpha Q \partial^\alpha Q + V(Q)\bigg)
+\]
+Per cui confrontandolo con la nota espressione
+\[
+T_{\mu \nu} = (\rho + p)u_\mu u_\nu + p g_{\mu \nu}
+\]
+troviamo che
+\[
+p = -\frac12 g^{\mu \nu} \partial_\mu Q \partial_\nu Q - V(Q)
+\]
+\[
+(\rho + p) u^\mu u^\nu = \partial^\mu Q \partial^\nu Q
+\]
+Moltiplicando a destra e a sinistra per $g_{\mu \nu}$ ed usando che $u^\mu u_\mu = -1$ troviamo che
+\[
+\rho = -\frac12 g^{\mu \nu} \partial_\mu Q \partial_\nu Q + V(Q)
+\]
+Allora, supponendo che il termine potenziale domini su quello cinetico (condizione di slow roll), si ha che
+\[
+w = -\frac{p}{\rho} \to -1
+\]
+$\rho$ e p devono poi soddisfare anche l'equazione di conservazione
+\[
+\dot{\rho} +3H(\rho + p)=0
+\]
+che diventa
+\marginpar{Vedi Weinberg}
+\[
+\ddot{Q} + 3 H \dot{Q} + \dfrac{\partial V}{\partial Q} = 0
+\]
+Soluzioni di questa equazione sono del tipo 
+\[
+V(Q) = M^{4 + \alpha} Q^\alpha \qquad \alpha > 0
+\]
+Tuttavia non c'è una ragione specifica per credere che il potenziale possa avere questa forma.
+
+\section{Problema materia oscura}
+Il modello $\Lambda$CDM richiede che $\Omega_{M, 0} = 0.3$, tuttavia si osserva che la materia barionica (galassie, elettroni, ...) non è così tanta ($\Omega_B \sim 0.05$) \\
+Possiamo studaire l'universo come un sistema statistico, cioè un gas di stelle che, sottoposto alla mutua gravità, si comprime e si riscalda. \\
+Studiando la velocità media delle particelle in campo gravitazionale mediante il teorema del viriale si può capire se la massa è corretta oppure c'è della massa \textit{nascosta}.
+\[
+2\cdot M <v^2> +  G M^2 <\frac1d> = 0
+\]
+Allora la massa dinamica M, cioè tutta la massa che genera il campo gravitazionale è
+\[
+M = \frac{2 <v^2>}{G <\frac1d>}
+\]
+dove $<v^2>$ si stima mediante effetto Doppler. \\
+In generale per un cluster di galassie $v \sim 10^3 \frac{km}{s}$ quindi 
+\[
+\bigg(\frac{M}{L}\bigg)_{\text{cluster}} \sim 500\bigg(\frac{M}{L}\bigg)_\odot
+\]
+Tuttavia per il coma cluster si è misurato 
+\[
+\bigg(\frac{M}{L}\bigg)_{\text{c.c.}} \sim 10\bigg(\frac{M}{L}\bigg)_\odot
+\]
+che a parità di luminosità (supponiamo che la materia oscura non emetta) ci dice che c'è della massa nascosta, quindi ci deve essere qualcos'altro che contribuisca al potenziale gravitazionale.
+\begin{oss}[Stima di $\frac{M}{L}$ a piccoli redshift]
+	Studiamo la dipendenza di $\frac{M}{L}$ da $H_0$.\\
+	\[
+	M \propto <\frac1d>^{-1} \propto \frac{z}{H_0}
+	\]
+	\marginpar{Dalla legge di Hubble $H_0 d = z$}
+	\[
+	L \propto d^2 \propto H_0^{-2}
+	\]
+	Allora
+	\[
+	\frac{M}{L} \propto H_0
+	\]
+\end{oss}
+
+Stimiamo adesso $\Omega_{M, 0}$.
+\[
+\rho_{M, 0} = \frac{M}{V} = \frac{M}{L} \mathcal{L}
+\]
+dove $\mathcal{L} \sim 2\cdot 10^8 h L_\odot\, Mpc^{-3}$. Allora
+\[
+\Omega_{M, 0} = \frac{\rho_{M, 0}}{\rho_{crit, 0}} = \frac{M}{L} \frac{\mathcal{L}}{\rho_{crit, 0}} \sim 0.15
+\]
+I gas ionizzati contenuti nei cluster possono spiegare il valore di $\Omega_{M, 0}$?\\
+Usando il fatto che 
+\[
+\frac12 M <v^2> = k_B T
+\]
+con $<v> \sim 10^3 \frac{km}{s}$ si ottengono temperature nel range di $10^7 - 10^8 \, K$ che corrispondono all'emissione di raggi X.
+\section{Curve di rotazione delle galassie}
+Ci aspettiamo che all'equilibrio gravitazionale 
+\[
+\frac{m v^2}{r} = \frac{G M(<r)m}{r^2}
+\]
+con 
+\[
+M(<r) = \int_{0}^{r} 4 \pi \rho(r) r^2 \, dr
+\]
+Allora 
+\[
+v = \sqrt{\frac{G M(<r)}{r}}
+\]
+Ci aspettiamo che per $r > r_*$, M diventi costante e quindi $v \propto \sqrt{\frac1r}$, tuttavia la curva di rotazione delle galassie si appiattisce. Questo ci suggerisce che ci debba essere qualcos'altro, che chiamiamo alone di materia oscura.
+\section{MACHOS (Massive Astrophysical Compact Halo ObjectS)}
+Sono i candidati alla materia oscura, ma barionica. Sono stati ricercati con il microlensing, ma la ricerca è fallita.
+\marginpar{inserire immagine}
+
+Le osservazioni non hanno trovato così tanti MACHOS e quindi si esclude che questi possano formare l'alone di materia oscura.
+
+\section{MOND (MOdified Newtonian Dynamics)}
+Modifichiamo la legge di Newton
+\[
+F = ma \to F = 
+\begin{cases}
+	ma, & a>a_0 \\
+	\frac{ma^2}{a_0}, & a< a_0
+\end{cases}
+\]
+con $a_0 \sim 10^{-10} \frac{m}{s^2}$. \\
+Sorprendentemente questo modello spiega in maniera accurata le curve di rotazione.
+
+\section{Termodinamica del primo universo}
+Ricordiamo che le funzioni di distribuzione per bosoni e fermioni sono, ponendo $k_B=1$
+\[
+F_A (E, T) = \frac{g_A}{(2 \pi)^3} \frac{1}{exp[(E - \mu)/T] \pm 1} =  \frac{g_A}{(2 \pi)^3} f_A(E, T)
+\]
+Allora la densità di particelle di una specie i sarà 
+\[
+\boxed{
+n_i = \int F_i(p, T) d^3p =  \frac{g_i}{(2 \pi)^3} \int f_i(p, T) d^3 p =  \frac{g_i}{2 \pi^2} \int_{m}^{\infty}   \frac{E \sqrt{E^2 - m^2}}{exp[(E - \mu)/T] \pm 1}\, dE
+}
+\]
+la densità di energia
+\[
+\boxed{\rho_i = \int F_i(p, T) E d^3p = \frac{g_i}{2 \pi^2} \int_{m}^{\infty}   \frac{E^2 \sqrt{E^2 - m^2}}{exp[(E - \mu)/T] \pm 1}\, dE}
+\]
+e la pressione
+\[
+\boxed{p_i = \int F_i(p, T) \frac{p^2}{3E} d^3p = \frac{g_i}{6 \pi^2} \int_{m}^{\infty}   \frac{ (E^2 - m^2)^\frac32}{exp[(E - \mu)/T] \pm 1}\, dE}
+\]
+Definiamo adesso il limite ultrarelativistico quando $T \gg m , \mu$.
+\\
+In questo limite la densità di energia per i bosoni è 
+\[
+\rho_{bosoni} = \frac{g}{2 \pi^2} \int_{0}^{\infty}   \frac{E^3}{exp[E/T] - 1}\, dE
+\]
+Chiamando $x = E/T$ otteniamo
+\marginpar{$$\int_{0}^{\infty} \frac{x^{n-1}}{e^x - 1} = \zeta(n) \Gamma(n)$$}
+\marginpar{$$\zeta(2) = \frac{\pi^2}{6}$$ \\ $$\zeta(4) = \frac{\pi^4}{90}$$ \\ $$\zeta(6) = \frac{\pi^6}{945}$$}
+\[
+\rho_{bosoni} = \frac{g T^4}{2 \pi^2} \int_{0}^{\infty}   \frac{x^3}{e^x - 1}\, dE =  \frac{g T^4}{2 \pi^2} \zeta(4) \Gamma(4) = \frac{\pi^2}{30}g T^4
+\]
+Analogamente la densità di bosoni ultrarelativistica è
+\[
+n_{bosoni} = \frac{g}{2 \pi^2} T^3 \Gamma(3) \zeta(3)
+\]
+mentre per la pressione basta ricordarci che per un fluido ultrarelativistico $p = \frac13 \rho$.\\
+Nel caso dei fermioni, invece, dobbiamo usare l'integrale notevole
+\[
+\int_{0}^{\infty} \frac{x^{n-1}}{e^x + 1} = B(n) \Gamma(n)
+\]
+\marginpar{$$B(2) = \frac{\pi^2}{12}$$ \\ $$B(4) = \frac78 \zeta(4)$$}
+dove $\{B(n)\}$ sono i numeri di Bernoulli.\\
+Allora nel caso ultrarelativistico
+\[
+\rho_F = \frac78 \rho_B 
+\]
+\[
+p_F = \frac78 p_B
+\]
+Nel caso non relativistico ($T \gg m$), invece, dobbiamo usare l'approssimazione 
+\[
+E \simeq m + \frac{p^2}{2m}
+\]
+quindi
+\[
+n_i = \frac{g_i}{(2 \pi)^3} \int \frac{1}{exp[(E - \mu)/T]\pm 1} \, d^3p \simeq \frac{g_i}{(2 \pi)^3} \int \frac{1}{exp[(\frac{p^2}{2m} + m - \mu)/T]\pm 1} \, d^3p  
+\]
+In questo caso possiamo trascurare il $\pm 1$ al denominatore riottenendo così la statistica di Boltzmann 
+\marginpar{$$x = \frac{p^2}{2mT}$$ \\ $$\int_{0}^{\infty} x^n e^{-x}\, dx = \Gamma(n- 1)$$ }
+\[
+n_i = \frac{g_i}{2 \pi^2} e^{(\mu - m)/T} \int_{0}^{\infty} p^2 e^{-\frac{p^2}{2mT}} \, dp = \frac{g_i}{2 \pi^2} e^{(\mu - m)/T} (mT)^{\frac32} \Gamma\bigg(\frac32\bigg) 
+\]
+quindi
+\[
+\boxed{
+n_i = g_i \bigg(\frac{mT}{2 \pi} \bigg)^{\frac32}  e^{(\mu - m)/T}
+}\]
+Inoltre 
+\[
+p = nT \ll \rho
+\]
+Calcoliamo adesso le energie medie nel caso ultrarelativistico
+\[
+<E> = \frac{\rho}{n} = \begin{cases}
+	\frac{\pi^4}{30 \zeta(3)}T \simeq 2.7 T,& \text{bosoni} \\
+	\vspace{1mm} \\
+	\frac{7 \pi^4}{180 \zeta(3)}T \simeq 3.15 T,& \text{fermioni} \\
+\end{cases}
+\]
+Nel caso non relativistico abbiamo invece che
+\[
+<E> = m + \frac32 T
+\]
+\begin{ex}
+	Consideriamo il seguente processo
+	\[
+	e^+ + e^- \longleftrightarrow \gamma + \gamma
+	\]
+	Poichè il potenziale chimico all'equilibrio si conserva ed il potenziale chimico dei fotoni è zero (perchè il numero di fotoni non si conserva), abbiamo che 
+	\[
+	\mu_+ + \mu_- = 0
+	\]
+	Allora
+	\[
+	n_+ - n_- = \frac{g}{2 \pi^2} \int_0^\infty dE\, E\sqrt{E^2 - m^2} \bigg[\frac{1}{exp[(E - \mu)/T] - 1} - \frac{1}{exp[(E + \mu)/T] - 1}  \bigg]
+	\]
+	Quindi
+	\[
+	n_+ - n_- = \begin{cases}
+		\frac{g T^3}{6 \pi^2} \bigg[\pi^2 \big(\frac{\mu}{T}\big) + \big(\frac{\mu}{T}\big)^3 \bigg], & T \gg m \\
+		\vspace{0.5mm} \\
+		2g\bigg(\frac{mT}{2 \pi} \bigg)^\frac32 e^{-m/T} \sinh\big(\frac{\mu}{T}\big), & T \ll m \\
+	\end{cases}
+	\]
+\end{ex}
+Ricordiamo ora l'espressione per la densità di energia ultrarelativistica dei bosoni (i fermioni hanno $\frac78$ davanti).
+\[
+\rho_{bosoni} = \frac{\pi^2}{30}g T^4
+\]
+Possiamo allora unirle per calcolare la densità di energia per un qualunque gas ultrarelativistico composto da più specie. Otteniamo così
+\[
+\rho = \frac{\pi^2}{30}g_*(T) T^4
+\]
+dove
+\marginpar{T è la temperatura del bagno termico, mentre $T_i$ è la temperatura della specie i-esima}
+\[
+g_*(T) = \sum_{i, bosoni} g_i \bigg(\frac{T_i}{T}\bigg)^4 + \frac78 \sum_{i, fermioni} g_i \bigg(\frac{T_i}{T}\bigg)^4
+\]
+è il numero efficace di gradi di libertà.
+\begin{oss}
+	Stiamo trascurando il contributo delle specie non relativistiche
+\end{oss}
+
+Usando poi l'equazione di Friedmann con $k=0$ troviamo che
+\marginpar{Q. perchè $k=0$?}
+\[
+\bigg(\frac{\dot{a}}{a}\bigg)^2 = H^2(t) = \frac{8 \pi G}{3}\rho_{tot} = \frac{8 \pi G}{3} \frac{\pi^2}{30}g_*(T) T^4 = \frac{4}{45} G \pi^3 g_*(T) T^4
+\]
+Allora
+\marginpar{$M_{Pl} = G^{-\frac12} = 1.22 \cdot 10^{19} GeV$}
+\[
+\boxed{
+	H(t) = 1.66 \sqrt{g_*(T)} \frac{T^2}{M_{Pl}}
+}
+\]
+\begin{ex}
+	Nel caso di universo dominato da radiazione l'età dell'universo è
+	\[
+	t_0 = \frac{1}{H_0} \int_{0}^1 dx \, \frac{1}{x \cdot x^{-2}} = \frac{1}{2 H_0}
+	\]
+\end{ex}
+\begin{ex}
+	\marginpar{100 Mev è l'energia della transizione di fase quark-adronica}
+	Calcoliamo $g_*(T)$ per $T \in [1\, MeV, 100\, Mev]$. A questo range di temperature contribuiscono $\gamma, \nu, e^+, e^-$ quindi all'equilibrio termico
+	\[
+	g_*(T) = g_\gamma + \frac78 (g_{e+} + g_{e-} + g_\nu \cdot 6)
+	\]
+	dove 6 è il numero di specie di neutrini che stiamo considerando (3 neutrini, 3 antineutrini).
+	\\
+	\marginpar{La degenerazione per particelle di spin s è $2s + 1$, mentre per i neutrini la degenerazione è 1 perchè hanno elicità fissata.}
+	$g_\gamma = 2, \quad g_{e+} = g_{e-} = 2, \quad g_\nu = 1$ \\
+	Quindi
+	\[
+	g_*(T) = 10.75
+	\]
+\end{ex}
+
+\section{Densità di entropia}
+L'entropia S è costante all'equilibrio, possiamo allora definire una densità di entropia s tale che
+\[
+S = s V = s a^3 = c.te \ra s \propto \frac{1}{a^3}
+\]
+Sappiamo poi che
+\[
+dU = TdS - pdV \ra Td(sV)  = d(\rho V) + pdV \ra TVds + TsdV = Vd\rho +  \rho dV + pdV
+\]	
+Allora
+\[
+s(T) = \frac{\rho + p}{T}
+\]
+\[
+p = \frac13 \rho \ra s(T) = \frac43 \frac{\rho(T)}{T} = \frac43 \frac{\pi^2}{30} g_{*s}(T) T^3 
+\]
+quindi
+\[
+\boxed{
+s(T) = \frac{2\pi^2}{45} g_{*s}(T) T^3
+}
+\]
+dove
+\[
+g_{*s} =  \sum_{i, bosoni} g_i \bigg(\frac{T_i}{T}\bigg)^3 + \frac78 \sum_{i, fermioni} g_i \bigg(\frac{T_i}{T}\bigg)^3
+\]
+Se l'entropia è conservata allora
+\[
+g_{*s} T^3 a^3 = c.te \ra T \propto \frac{1}{a} g_{*s}^{-\frac13}(T)
+\]
+
+\section{Disaccoppiamento delle specie}
+Se consideriamo un certo processo allora il suo rate caratteristico sarà
+\[
+\Gamma = n \sigma v
+\]
+dove $\sigma$ è la sezione d'urto.\\
+Per capire se una specie è in equilibrio o meno possiamo confrontare questo rate con il rate di espansione dell'universo. La temperatura a cui i due rate sono equivalenti è detta temperatura di disaccoppiamento $T_D$
+\[
+\Gamma(T_D) = H(T_D)
+\]
+Infatti dopo questa temperatura, la velocità delle particelle sarà minore di quella dell'espansione dell'universo e quindi la probabilità che i processi accadano diminuirà. Quando $T < T_D$ le interazioni non saranno più efficaci quindi la particella esce dall'equilibrio con il bagno termico. \\
+Per $T \le T_D$ abbiamo che
+\[
+f(p, T) = \frac{1}{exp[(E - \mu)/T] \pm 1}
+\]
+ma per definizione
+\[
+f(p, T) = \frac{dn}{d^3p}
+\]
+con 
+\[
+n \propto a^{-3} \quad p^3 \propto a^{-3}
+\]
+Allora $f(p)$ è costante a T fissata.
+\begin{oss}
+	Il fatto che f non vari segue anche dal teorema di Liouville
+\end{oss}
+Per $T > T_D$, invece, non posso fissare la temperatura e studiare il comportamento della funzione al variare del tempo in quanto temperatura e tempo sono legati tra loro.
+\\
+Consideriamo adesso il caso ultrarelativistico con $T \le T_D$. Allora le particelle non interagiscono e la funzione di distribuzione non dipende dal tempo.
+\\
+L'energia subisce però il redshift ($p \propto a^{-1} \ra E \propto a^{-1}$). Allora possiamo considerare il redshift anzichè sull'energia, sulla temperatura, per cui avremo che \[
+f(E, T_D) = f(E_D, T_D) = f(E(t) \frac{a(t)}{a_D}, T_D) = f(E(t), T)
+\]
+con $T = T_D \frac{a_D}{a(t)}$. Infatti
+\[
+f(E(t) \frac{a(t)}{a_D}, T_D) = \bigg[exp\bigg(\frac{E(t) a(t)}{T_Da_D}\bigg)\bigg]^{-1} = \bigg[exp\bigg(\frac{E(t)}{T_Da_D / a(t)}\bigg)\bigg]^{-1} = f(E(t), T)
+\]
+Nel caso non relativistico, invece, 
+\[
+E(t) = E_D \bigg( \frac{a_D}{a(t)}\bigg)^2
+\]
+quindi procedendo analogamente troviamo che
+\[
+T = T_D \bigg( \frac{a_D}{a(t)}\bigg)^2
+\]
+\section{Disaccoppiamento dei neutrini}
+Per i processi dei neutrini che consideriamo
+\marginpar{$G_F = \frac{1}{292,8}\, GeV^{-2}$}
+\[
+\Gamma \simeq G_F^2 T^5
+\]
+Allora $T_D$ si trova risolvendo
+\[
+\Gamma(T_D) = H(T_D) \ra 1.66 \sqrt{g_*} \frac{T_D^2}{M_{Pl}} = G_F^2 T_D^5
+\]
+Quindi
+\[
+T_D \simeq \bigg(\frac{1}{M_{Pl} G_F^2}\bigg)^\frac13 = 0.85 \, MeV
+\]
+Sperimentalmente si trova che 
+\[
+T_D(\nu_e) = 2\, MeV \quad T_D(\nu_{\mu, \tau}) = 3.5 \, MeV
+\]
+Consideriamo adesso un universo composto da fotoni, elettroni, positroni e neutrini ed una temperatura iniziale $T_i$ ed una finale $T_f$ tali che
+\[
+T_f \le T_{e^\pm} \le T_i = T_D(\nu)
+\]
+con $T_{e^\pm}$ temperatura di disaccoppiamento di elettroni e positroni. \\
+I neutrini si sono disaccoppiati dal resto del sistema quindi la loro entropia $S_\nu$ si conserva
+
+\[
+S_\nu(T_f(\nu)) = a^3(T_f)T_f(\nu)^3 = c.te = a^3(T_i) T_i^3 = S_\nu(T_i) 
+\]
+
+\begin{oss}
+	Se la temperatura dipende da $\nu$ allora si riferisce ai neutrini, altrimenti si riferisce al bagno termico durante o dopo il disaccoppiamento. Vediamo un esempio per chiarire:\\
+	$T_i$ è la temperatura iniziale del sistema composto da neutrini, leptoni e fotoni;\\
+	$T_f$ è la temperatura finale del sistema composto solo da leptoni e fotoni;\\
+	$T_f(\nu)$ è la temperatura finale del sistema di neutrini, che in generale, essendo i neutrini disaccoppiati, sarà diversa da $T_f$.
+\end{oss}
+Notiamo quindi che nell'equazione precedente, $a(T)$ dipende da $T_f$ e non da $T_f(\nu)$.\\
+Per la conservazione dell'energia del bagno termico, poi, abbiamo che 
+\[
+S_\gamma(T_f) + S_\nu(T_f(\nu)) = S_\gamma(T_i) + S_\nu(T_i) + S_{e^\pm} (T_i)
+\]
+Cancellando i termini dei neutrini per quanto detto sopra si ha che
+\[
+2 a^3(T_f)T_f^3 = (2 + \frac78 \cdot 2 \cdot 2)a^3(T_i) T_i^3
+\]
+Poichè stiamo considerando particelle relativistiche quali i neutrini abbiamo che 
+\[
+\frac{a^3(T_i)}{a^3(T_f)} = \frac{T_f(\nu)^3}{T_i^3}
+\]
+Sostiuendo dunque $a^3(T_f)$ troviamo $T_f(\nu)$ in funzione di $T_f$, in particolar modo troviamo che
+\[
+T_f(\nu) = \bigg(\frac{4}{11}\bigg)^{\frac13} T_f
+\]
+Calcoliamo ora la densità di energia della radiazione al tempo $t_0$.
+\[
+g_*(T_0) = 2+ \frac78 \cdot 2 \cdot 3 \cdot \bigg(\frac{T_0(\nu)}{T_0}\bigg)^4 = 3.36
+\]
+Allora
+\[
+\rho_R(T_0) = \frac{\pi^2}{30}g_*(T_0)T_0^4 \simeq 3.4 \cdot 10^{-15}
+\]
+Calcoliamo ora il momento in cui l'universo è stato dominato dalla materia.
+Questo, in termini di temperatura, corrisponde a $T_{eq}$
+\[
+T_{eq} = T_0 \frac{\Omega_{M, 0}}{\Omega_{R, 0}} = 6.56 \cdot 10^4 (\Omega_{M, 0} h^2) K \simeq 10^4 K 
+\]
+Inoltre, per universo dominato da radiazione
+\[
+H(t) = \frac{1}{2 t}
+\]
+Allora
+\[
+t = \frac{1}{2 H(T_{eq})} \simeq 10^{12} \simeq 50000\,yrs
+\]
+Cioè dopo 50 000 anni l'universo è stato dominato dalla materia.
+\begin{oss}
+	Rifacciamo adesso quanto fatto per i neutrini anche per i gravitoni. Supponiamo $\Gamma \sim G_N^2 T^5$, inoltre dal modello standard $g_*(T_D) > 106.75$. Allora procedendo come per i neutrini troviamo che
+	\[
+	T_{grav} = \bigg(\frac{g_{*S}(T_0)}{g_{*S}(T_D)}\bigg)^\frac13 T_\gamma < 10^{-2} T_\gamma
+	\]
+	dove $T_\gamma$ è la temperatura dei fotoni al tempo di disaccoppiamento dei gravitoni e quindi soddisfa la relazione
+	\[
+	T_\gamma = T_0 \frac{a(T_0)}{a(T_D)}
+	\]
+\end{oss}
+\section{CMB (Cosmic Microwave Background)}
+La Big Bang Nucleosintesi (BBN) è la fase iniziale dell'universo(10s - 20min di vita) in cui è iniziata la produzione di nuclei oltre l'idrogeno. La temperatura a cui essa è avvenuta è 
+\[
+T_{BBN} = 10^9 K
+\]
+ alla quale corrisponde una densità di barioni pari a 
+\[
+n_B \sim 10^{18}\, cm^{-3}
+\]
+Alla temperatura odierna ($T_0 = 2.7\,K$), invece,
+\[
+n_{B, 0} = 10^{-7}\, cm^{-3}
+\]
+Possiamo allora stimare il redshift come (ricordando che $n \propto a^{-3}$)
+\[
+1 + Z_{BBN} = \bigg(\frac{n_B(T_{BBN})}{n_B(T_0)}\bigg)^\frac13 
+\]
+\marginpar{Inserire parte du Rayleigh-Jeans}
+
+Studiamo adesso quando i fotoni si disaccoppiano dal bagno termico.\\
+Consideriamo lo scattering Thomson per cui
+\[
+\Lambda_\gamma = n_e \sigma_T c \qquad \sigma_T \sim 6.65 \cdot 10^{-24}\, cm^2
+\]
+Assumiamo poi che la frazione di massa dell'idrogeno sia del 76\% e quella dell'elio del 24 \%, allora gli elettroni per nucleoni saranno
+\[
+0.76 + \frac12 \cdot 0.24 = 0.88
+\]
+Allora
+\[
+n_e = 0.88 n_B = 0.88 n_B(T_0) \bigg(\frac{T}{T_0}\bigg)^3
+\]
+Per ogni urto si trasferisce poi un'energia pari a $\frac{(k_B T)^2}{m_e}$ allora
+\[
+\frac{\Delta E}{E} = \frac{(k_B T)^2}{m_e} \frac{1}{k_B T} = \frac{k_B T}{m_e}
+\]
+Possiamo allora calcolare il rate del processo come
+\[
+\Gamma_\gamma \frac{\Delta E}{E} \Lambda_\gamma = 9\cdot10^{-29}\, s^{-1} (\Omega_{B, 0}h^2) \bigg(\frac{T}{T_0}\bigg)^4
+\]
+che va confrontato con $H = \sqrt{\frac{8 \pi G}{3} \rho}$ per trovare la temperatura a cui si disaccoppiano i fotoni, che risulta essere
+\marginpar{La temperatura di disaccoppiamento è detta anche temperatura di freeze out}
+\[
+T_F \sim 10^5\, K
+\]
+
+
+\section{Ricombinazione}
+Consideriamo il processo
+\[
+p + e^- \longleftrightarrow H + \gamma
+\]
+Per le specie non relativistiche ricordiamo che vale
+\[
+n_i = g_i \bigg(\frac{m_i T}{2 \pi}\bigg)^\frac32 e^{\frac{\mu - m}{T}}
+\]
+con 
+\[g_p = g_e = 2s + 1 = 2, \, g_H = \underbrace{1}_{\uparrow\downarrow} + \underbrace{3}_{\uparrow\uparrow} = 4
+\]
+All'equilibrio poi
+\[
+\mu_p + \mu_e = \mu_H
+\]
+Mentre per neutralità
+\[
+n_e = n_p
+\]
+Per temperature poi $\lesssim 10 \, eV$, $^4He$ è completamente legato, quindi il numero di elettroni liberi è esattamente il numero di idrogeni ionizzati
+\[
+n_e = n_H^{ion}
+\]
+Invertiamo ora la relazione per le densità di particelle così da trovare $e^\mu$ in funzione degli altri termini e ricordiamo la definizione di energia di legame
+\[
+E_B = m_e + m_p - m_H
+\]
+Ricaviamo così la densità di particelle di idrogeno
+\begin{align*}
+n_H =&\, g_H \bigg(\frac{m_H T}{2 \pi}\bigg)^\frac32 e^{\frac{\mu_H - m_H}{T}} \\
+    =&\, \frac{g_H}{g_p g_e} (n_p n_e) \bigg(\frac{m_H}{m_p m_e}\bigg)^\frac32\bigg(\frac{2 \pi}{T}\bigg)^\frac32 e^{E_B/T} \\
+    =&\, n_p^2 \bigg(\frac{2 \pi}{m_e T}\bigg)^\frac32 e^{E_B/T}
+\end{align*}
+Se adesso definiamo la frazione di ionizzazione
+\[
+X = \frac{n_p}{n_p + n_H}
+\]
+allora possiamo invertire l'equazione per trovare $n_H$ in funzione di X
+\[
+n_H = \frac{1 - X}{X}n_p
+\]
+possiamo poi riscrivere tutto come
+\[
+n_H = A n_p^2 \ra \frac{1 - X}{X} n_p = An_p^2 
+\]
+Moltiplico a destra e sinistra per $n_B = n_p + n_H,\,(X = \frac{n_p}{n_B})$ e trovo che
+\[
+\frac{1 - X}{X^2} = A n_B
+\]
+dove $A = \big(\frac{2 \pi}{m_e T}\big)^\frac32 e^{E_B/T}$. Posso poi riscrivere l'equazione nella forma
+\[
+\boxed{
+	\frac{X^2}{1 - X} = \bigg(\frac{m_e T}{2 \pi}\bigg)^\frac32 e^{-E_B/T}\frac{1}{n_B}
+}
+\]
+detta Equazione di Saha.
+\begin{oss}
+	Poichè $n_p = n_e$ possiamo scrivere X anche come $X = X_e = \frac{n_e}{n_B}$
+\end{oss}
+
+Vediamo adesso quando avviene il disaccoppiamento.
+\[
+\Gamma = n_e \sigma_T v = X_e n_B \sigma_T v
+\]
+\begin{oss}
+	Al tempo di equivalenza abbiamo che 
+	\[
+	\Omega_R(T_{eq}) = \Omega_M (T_{eq})
+ 	\]
+ 	Possiamo riscrivere $\Omega_R$ ed $\Omega_M$ in funzione del valore di equivalenza in quanto sappiamo come scalano con $a(t)$. Allora
+ 	\[
+ 	\Omega_R = \Omega_R(T_{eq}) \bigg(\frac{x_{eq}}{x}\bigg)^4 \qquad \Omega_M = \Omega_M(T_{eq}) \bigg(\frac{x_{eq}}{x}\bigg)^3
+ 	\]
+ 	Allora per quanto detto prima
+ 	\[
+ 	\Omega_R(T_{eq}) \bigg(\frac{x_{eq}}{x}\bigg)^3 = \Omega_R\bigg(\frac{x}{x_{eq}}\bigg) = \Omega_M
+ 	\]
+ 	quindi
+ 	\[
+ 	\Omega_R = \frac{x_{eq}}{x} \Omega_M = \frac{1 + z}{1 + z_{eq}}\Omega_M
+ 	\]
+\end{oss}
+
+Ricordiamo che
+\[
+H^2 = H_0^2 \bigg[\Omega_{M, 0}x^{-3} + \Omega_{R, 0}x^{-4} \bigg]
+\]
+Allora
+\marginpar{$$x_0 = 1 \ra x = \frac{1}{1 + z},$$ \\ $$ \Omega_{R, 0} = x_{eq} \Omega_{M, 0}$$}
+\[
+H^2 = H_0^2 \Omega_{M, 0}(1 + z)^3 \bigg(1 + \frac{1 + z}{1 + z_{eq}} \bigg)
+\]
+Allora $\Gamma = H$ implica che
+
+\[
+(1 + z_{dec})^\frac32 = \frac{280}{X_e(\infty)} \bigg(\frac{\Omega_{B, 0} h^2}{0.02}\bigg)^{-1} \bigg(\frac{\Omega_{M, 0} h^2}{0.15}\bigg)\sqrt{1 + \frac{1 + z_{dec}}{1 + z_{eq}}}
+\]
+\marginpar{$X_e(\infty) = 7 \cdot 10^{-3}$ da Saha}
+Risolvendo otteniamo $z_{dec} = 1100$ che è il momento in cui la CMB si disaccoppia dal bagno termico.\\
+La temperatura corrispondente è
+\[
+T_{dec} = 3000 \, K
+\]
+\section{Nucleosintesi del Big Bang}
+L'abbondanza di elementi leggeri prodotti dalla BBN è determinata dal rapporto
+\[
+\frac{n}{p} \equiv \frac{n_n}{n_p}
+\]
+I processi che avvengono sono deboli e sono 
+\begin{align*}
+\nu + n &\longleftrightarrow p + e^- \\
+e^+ + n &\longleftrightarrow p + \bar{\nu}_e \\
+n &\longrightarrow p + e^- + \bar{\nu}_e \\
+\end{align*}
+Essendo processi deboli $\Gamma \sim G_F^2 T^5$ da cui si ricava che $T_D = 1\, MeV$(Vedremo in seguito come si stima). \\
+Consideriamo adesso il primo. All'equilibrio, a $T \gg 1\, MeV$, 
+\[
+\mu_\nu + \mu_n = \mu_p + \mu_e
+\]
+Protoni e neutroni sono poi non relativistici, quindi vale la statistica classica.
+\[
+n_i = g_i \bigg(\frac{m T}{2 \pi}\bigg)^\frac32 e^{(\mu - m)/T}
+\]
+Allora
+\[
+\frac{n}{p} = exp(\frac{\mu_n - \mu_p}{T})exp(\frac{m_p - m_n}{T})
+\]
+Chiamiamo $Q = m_n - m_p \sim 1\, MeV$.\\
+Gli elettroni, invece, sono ultrarelativistici, quindi
+\[
+N_e = n_{e^-} - n_{e^+} = \frac{g_e T^3}{6 \pi^2} \bigg[\pi^2 \frac{\mu}{T} + \bigg(\frac{\mu}{T}\bigg)^3 \bigg]
+\]
+I fotoni, che sono presenti anche se non interagiscono, hanno poi una densità di particelle pari a 
+\[
+n_\gamma = \frac{\zeta(3)}{\pi^2}2 T^3
+\]
+Allora, al prim'ordine,
+\[
+\frac{N_e}{n_\gamma} \sim \frac{\mu_e}{T}
+\]
+Per neutralità abbiamo sempre $N_e = n_p$ ed assumiamo che $n_p$ sia dello stesso ordine di grandezza di $n_B$. Abbiamo informazioni anche sul rapporto
+\[
+\frac{n_B}{n_\gamma} \sim 10^{-10}
+\]
+Allora, per quanto detto prima
+\[
+\frac{n_B}{n_\gamma} \sim \frac{N_e}{n_\gamma} \sim \frac{\mu_e}{T} \sim 10^{-10}
+\] 
+Sperimentalmente si trova poi che $\mu_\nu = 0$ per cui
+\[
+\frac{n}{p}\bigg|_{eq} = e^{-Q/T}
+\]
+Vogliamo adesso stimare $T_D$.
+Il rate del processo è 
+\[
+\Gamma_{pe \to \nu n}(T) = \int f_e(E_e) (1 - f_\nu(E_\nu))|M|^2_{pe \to \nu n} \frac{1}{(2\pi)^5} \delta^4(p_p + p_e - p_\nu - p_n) \, \frac{d^3p_e}{2E_e} \frac{d^3p_\nu}{2E_\nu} \frac{d^3p_n}{2E_n}
+\]
+con 
+\[
+|M|^2 = \frac{G^2_F (1 + 3g_A)}{2 \pi^3}\qquad g_A = 1.26 
+\]
+$|M|^2$ può essere scritta in termini della vita media dei neutroni
+\[
+\tau_n \simeq 885\,s
+\]
+Allora
+\[
+\Gamma_{pe \to \nu n}(T) = \begin{cases}
+	\frac{1}{\tau_n}\bigg(\frac{T}{m_e}\bigg)^3 e^{-Q/T},& T \ll Q, m_e \\
+	\vspace{1mm} \\
+	\frac{7}{60}\pi (1 + 3g_A^2)G_F^2 T^5 \simeq G_F^2 T^5,& T \gg Q. m_e \\
+\end{cases}
+\]
+Nel nostro caso abbiamo che 
+\[
+\Gamma(n \to p)  \simeq \Gamma(p \to n) \simeq 0.4\,s^{-1} \bigg(\frac{T}{10^{10}\,K}\bigg)^5
+\]
+Quindi alla temperatura di disaccoppiamento
+\[
+\frac{n}{p} \bigg|_{T_D} = exp\bigg(-\frac{Q}{T_D}\bigg) \simeq \frac15
+\]
+Studiamo adesso la produzione dell'Elio.\\
+Vediamo la catena di processi che porta alla produzione di $^4He$
+\marginpar{$d$ è il deuterio}
+\marginpar{il primo è un processo forte e quindi rapido}
+\begin{align*}
+	p + n &\longleftrightarrow d + \gamma  \\
+	d + d &\longrightarrow ~^3H + p \\
+	d + d &\longrightarrow ~^3He + n \\
+	d + ^3H &\longrightarrow ~^4He + n \\
+	d + ^3He &\longrightarrow ~^4H_e + p \\	
+\end{align*}
+Tuttavia se abbiamo molti fotoni nel bagno termico, essi possono dissociare che cread un collo di bottiglia per la produzione di Elio.\\
+Ricordiamo infatti che, per una specie A non relativistica
+\[
+n_A = g_A \bigg(\frac{m_A T}{2 \pi}\bigg)^\frac32 e^{(\mu_A - m_A)/T}
+\]
+dove all'equilibrio chimico
+\[
+\mu_A = Z\mu_p + (A - Z) \mu_n
+\]
+L'energia di legame è poi
+\[
+B_A = Z m_p + (A - Z)m_n - m_A
+\]
+Combinando queste espressioni otteniamo
+\[
+n_A =  g_A \bigg(\frac{m_A T}{2 \pi}\bigg)^\frac32 \bigg(\frac{n_p}{g_p} \bigg(\frac{2 \pi}{m_p T}\bigg)^\frac32 \bigg)^Z 
+\bigg(\frac{n_n}{g_n} \bigg(\frac{2 \pi}{m_n T}\bigg)^\frac32 \bigg)^{A - Z} e^{B_A/ T}
+\]
+ricordando che $m_p \sim m_n$ e che $g_p = g_n = 2$ otteniamo che
+\[
+n_A = g_A \bigg(\frac{m_A T}{2 \pi}\bigg)^\frac32 n_p^Z n_n^{A - Z}  \bigg(\frac{2 \pi}{m_n T}\bigg)^\frac{3A}{2} 2^{-A} 
+\] 
+definiamo poi $X_A = A \frac{n_A}{n_B}$ che è la frazione di massa di A ed $\eta = \frac{n_B}{n_\gamma}, \, n_\gamma = \frac{\zeta(3)}{\pi^2} 2 T^3$. Allora moltiplicando per $A/n_B$ entrambi i membri otteniamo
+\marginpar{$$X_p = \frac{n_p}{n_B}$$ \\ $$X_n = \frac{n_n}{n_B}$$}
+\[
+X_A = A \frac{1}{n_B} g_A \bigg(\frac{m_A T}{2 \pi}\bigg)^\frac32 n_p^Z n_n^{A - Z}  \bigg(\frac{2 \pi}{m_n T}\bigg)^\frac{3A}{2} 2^{-A} 
+\]
+Molitplichiamo per $n_B^Z/n_B^Z$
+\[
+X_A = A \frac{1}{n_B} g_A \bigg(\frac{m_A T}{2 \pi}\bigg)^\frac32 \frac{n_p^Z}{n_B^Z} n_n^A \frac{n_B^Z}{n_n^Z}  \bigg(\frac{2 \pi}{m_n T}\bigg)^\frac{3A}{2} 2^{-A} 
+\]
+Procediamo analogamente per gli altri passaggi
+\marginpar{da formattare meglio}
+\[
+\ra X_A = 2^{-A} g_A A \frac{n_B^A}{n_B} \frac{n_n^A}{n_B^A} X_p^Z X_n^{-Z} (2 \pi)^{\frac32 (A - 1)} m_A^\frac32 m_p^{-\frac{3A}{2}} e^{B_A/T} T^{\frac32 (1 - A)} 
+\]
+\[
+\ra X_A =  2^{-A} g_A A  \frac{n_B^{A-1}}{n_\gamma^{A - 1}} n_\gamma^{A - 1} X_p^Z X_n^{A - Z} (2 \pi)^{\frac32 (A - 1)} m_A^\frac32 m_p^{-\frac{3A}{2}} e^{B_A/T} T^{\frac32 (1 - A)} 
+\]
+\[
+\ra X_A = 2^{-A} g_A A \eta^{A - 1} \bigg(\frac{\zeta(3)}{\pi^2} 2 T^3\bigg)^{A - 1} T^{3(A - 1)} X_p^Z X_n^{A - Z} (2 \pi)^{\frac32 (A - 1)} m_A^\frac32 m_p^{-\frac{3A}{2}} e^{B_A/T} T^{\frac32 (1 - A)} 
+\]
+che possiamo scrivere come
+\[
+\boxed{
+	X_A = F(A) \bigg(\frac{T}{m_p}\bigg)^{\frac32(A - 1)} X_p^Z X_n^{A - Z} e^{B_A/T} \eta^{A - 1}
+}
+\]
+con 
+\marginpar{$$\frac{m_A}{m_p} \simeq A$$}
+\[
+\boxed{
+	F(A) = g_A A^\frac52 \bigg[\zeta(3) \pi^{-\frac12} 2^{(3A - 5)/(2A - 2)} \bigg]^{A - 1}
+	}
+\]
+La temperatura a cui $X_A$ diventa significativo è (trascurando $F(A)$ poichè a fissato nucleo è costante)
+\[
+T_A = \frac{B_A (A - 1)^{-1}}{-1.5 \ln\bigg(\frac{T_A}{m_p}\bigg) - \ln\eta}
+\]
+con $X_n \sim X_p \sim 1$.
+\begin{ex}
+	\[
+	T_{~^3H} \sim 1.4 \cdot 10^9 \, K \sim 0.1 \, MeV
+	\]
+	\[
+	T_{~^3He} \sim 1.3 \cdot 10^9 \, K \sim 0.11 \, MeV
+	\]
+	\[
+	T_{~^4He} \sim 3.1 \cdot 10^9 \, K \sim 0.28 \, MeV
+	\]
+\end{ex}
+Vediamo inoltre che
+\[
+\bigg(\frac{n}{p}\bigg)_{finale} = \bigg(\frac{n}{p}\bigg)_{T_D}
+exp \big(-\frac{t}{\tau_n}\big)
+	 \simeq \frac17
+\]
+che è un decadimento poissoniano.
+\\
+L'abbondanza finale dell'Elio è poi
+\[
+\frac{N_{He}}{N_{tot}} = \frac{\frac14 (N_n + N_p)}{N_n + N_p} = 0.25
+\]
+Le osservazioni di elementi leggeri sono consistenti con le predizioni della BBN per 
+\[
+\eta \sim 5 \cdot 10^{-10}
+\]
+Inoltre
+\[
+\Omega_{B, 0} h^2 = \eta \cdot 3.65 \cdot 10^7 \qquad h \simeq 0.7
+\]
+\[
+\ra \Omega_{B, 0} \simeq 0.4 \ll \Omega_{M, 0} = 0.3
+\]
+Studiamo infine la produzione del Litio.
+\\
+Per ottenere il Litio i processi che ci interessano sono
+\begin{align*}
+	^3He + ~^4He &\longrightarrow ~^7Li + \gamma  \\
+	^3He + ~^4He &\longrightarrow ~^7Be + \gamma  \\
+	^7Be + e^- &\longrightarrow ~^7Li + \nu  \\
+	p + ~^7Li &\longrightarrow ~^4He + ~^4He  \\
+\end{align*}
+Possiamo inoltre usare la BBN per porre dei limiti alle specie oltre al modello standard, infatti se dovesse esistere una particella relativistica non predetta dal modello standard $g_*$ aumenterebbe e di conseguenza $H$ e quindi $T_D$.\\
+La BBN fornisce dunque un limite su $g_*$ in quanto
+\[
+\Delta N_\nu = 1 \ra \Delta g_* = 0.454
+\]
+Introducendo, per esempio, un nuovo tipo di neutrino nel bagno termico $g_*$ aumenterebbe di $\Delta g_*$, tuttavia dalle osservazioni sperimentali deduciamo che $\Delta_\nu < 0.4$.
+\section{Equazione di Boltzmann}
+Per una specie particellare di densità $n$ nell'universo di Friedmann si ha che
+\[
+\dot{n} + 3Hn = 0
+\] 
+se non ci sono collisioni e la specie non decade.\\
+In presenza di collisioni, invece, abbiamo che
+\marginpar{$C(f)$ è detto termine collisionale}
+\[
+\dot{n} + 3Hn = C(f)
+\]
+\begin{oss}
+	L'equaziome di Boltzmann connette il termine di Liouville $L(f)$ ed il termine collisionale
+	\[
+	L(f) = C(f)
+	\]
+\end{oss}
+Consideriamo adesso una specie $i$ che non decade, ma si annichila in un processo
+\[
+i + j \longleftrightarrow k + l
+\]
+Definiamo 
+\[
+C_i = C_{kl\to ij} - C_{ij \to kl}
+\]
+dove
+
+\[
+C_{ij\to kl} = (2\pi)^4 \int \frac{d^4 p_i}{(2 \pi)^3} g_i \frac{d^4 p_j}{(2 \pi)^3} g_j \frac{d^4 p_k}{(2 \pi)^3} g_k \frac{d^4 p_l}{(2 \pi)^3} g_l \delta^4(p_i + p_j - p_k - p_l) |M_{ij \to kl}|^2 f_i f_j (1 \pm f_k) (1 \pm f_l)
+\]
+\marginpar{+ per i bosoni, - per i fermioni}
+Consideriamo poi $E - \mu/T \gg 1$(che è la situazione cosmologica che ci interessa) così che 
+\[
+1 + f = 1 + \frac{1}{e^{(E - \mu)/T} \pm 1} \simeq 1 
+\]  
+\begin{ex}
+	Prendiamo ad esempio una specie leptonica $l$ che si annichila nel seguente modo
+	\[
+	l + \bar{l} \longleftrightarrow x + \bar{x}
+	\]
+	con 
+	\[
+	f_l = exp\bigg(-\frac{E_l}{T}\bigg)
+	\]
+	Allora per conservazione dell'energia 
+	\[
+	f_l f_{\bar{l}}	= exp\bigg(-\frac{E_l + E_{\bar{l}}}{T}\bigg) =  exp\bigg(-\frac{E_x + E_{\bar{x}}}{T}\bigg) = f_x^{EQ} f_{\bar{x}}^{EQ}
+	\]
+	Allora
+	\[
+	C_x = - \frac{g_x^2 g_l^2}{(2 \pi)^8} \int \frac{d^3 p_x}{2 E_x} \frac{d^3 p_{\bar{x}}}{2 E_{\bar{x}}} \frac{d^3 p_l}{2 E_l} \frac{d^3 p_{\bar{l}}}{2 E_{\bar{l}}} \delta^4(p_l + p_{\bar{l}} - p_x - p_{\bar{x}}) |M|^2 (f_x f_{\bar{x}} - f_x^{EQ} f_{\bar{x}}^{EQ})
+	\]
+	Allora
+	\marginpar{vedi Uzan}
+	\[
+	\dot{n}_x + 3Hn_x = C_x = -<\sigma v> [n_x^2 - (n_{\bar{x}}^{EQ})^2]
+	\]
+	con
+	\[
+	<\sigma v> \equiv \frac{1}{(n_{\bar{x}}^{EQ})^2} \int \frac{d^3 p_x}{2 E_x} \frac{d^3 p_{\bar{x}}}{2 E_{\bar{x}}} \frac{d^3 p_l}{2 E_l} \frac{d^3 p_{\bar{l}}}{2 E_{\bar{l}}} \delta^4(p_l + p_{\bar{l}} - p_x - p_{\bar{x}}) |M|^2 \frac{e^{-(E_x + E_{\bar{x}})/T}}{(2 \pi)^8}
+	\]
+	che è la media termica della sezione d'urto.\\
+	Definiamo adesso
+	\[
+	Y_x = \frac{n_x}{s}
+	\]
+	che è utile in quanto, se le specie non cambiano, sia $n_x$ che $s$ vanno come $T^3$.\\
+	Allora
+	\[
+	\boxed{
+	\dot{Y}_x = -<\sigma v> s [Y_x^2 - (Y_x^{EQ})^2]
+	}
+	\]
+	\[
+	s \dot{Y} = \dot{n} + 3Hn	
+	\]
+	Definiamo inoltre
+	\[
+	x = \frac{m}{T}
+	\]
+	Allora, ricordando che
+	\[
+	H(t) = 1.66 \sqrt{g_*(T)} \frac{T^2}{M_{Pl}} \equiv \frac1k T^2
+	\]
+	nella fase in cui domina la radiazione
+	\[
+	t = \frac{1}{2 H} = \frac12 k T^{-2} =\frac{k}{2m^2} x^2
+	\]
+	Allora
+	\[
+	\frac{dt}{dx} = \frac{k}{m^2} x = \frac{k}{T^2} \frac{1}{x} = \frac{1}{Hx} \qquad \frac{dx}{dt} = Hx
+	\]
+	Chiamiamo
+	\[
+	\Delta = Y_x - Y_x^{EQ}
+	\]
+	e riscriviamo l'equazione di Boltzmann come
+	\[
+		\dot{Y}_x = -<\sigma v> s (Y_x - Y_x^{EQ}) (Y_x + Y_x^{EQ})
+	\]
+	\[
+	\ra	\frac{dx}{dt} \frac{dY_x}{dx} = -<\sigma v> s \Delta (Y_x + Y_x^{EQ})
+	\]
+	\[
+ 	\ra	Hx\bigg(\frac{dY_x}{dx} - \frac{dY_x^{EQ}}{dx} \bigg) = - Hx \frac{dY_x^{EQ}}{dx} - <\sigma v> s \Delta (\Delta + 2Y_x^{EQ})
+	\]
+	\[
+	\ra \frac{d\Delta}{dx} = -\frac{dY_x^{EQ}}{dx} - \frac{1}{Hx} <\sigma v> s \Delta (\Delta + 2Y_x^{EQ})
+	\]
+	quindi
+	\[
+	\boxed{
+		\frac{d\Delta}{dx} = -\frac{dY_x^{EQ}}{dx} - \lambda x^{-2}\Delta (\Delta + 2Y_x^{EQ})
+	}	
+	\]
+	con
+	\[
+	\lambda = \frac{x}{H} <\sigma v> s = <\sigma v> \frac{m}{T} 
+	\]
+	Usando il fatto che
+	\[
+	s(T) = \frac{2\pi^2}{45} g_{*s}(T) T^3
+	\]
+	possiamo scrivere $\lambda$ come
+	\[
+	\boxed{
+	\lambda = <\sigma v> \sqrt{\frac{\pi}{45}} \frac{g_{*s}(T)}{\sqrt{g_*(T)}}m M_{Pl}
+}
+	\]
+	Un altro modo ancora di scrivere l'equazione di Boltzmann è 
+	\[
+	\boxed{
+		\frac{x}{Y_x^{EQ}} \frac{dY_x}{dx} = -\frac{\Gamma}{H}\bigg[\bigg(\frac{Y_x}{Y_x^{EQ}}\bigg)^2 - 1\bigg]
+	}
+	\]
+	con 
+	\[
+	\Gamma = n^{EQ} <\sigma v>
+	\]
+	\marginpar{Inserire immagini}
+	Osserviamo che la specie, dopo $x_F$ ($x$ di freeze out) esce dall'equilibrio e si assesta ad $Y_\infty$. Inoltre all'aumentare di $\sigma$ il disaccoppiamento avviene più tardi, cioè $x_F$ aumenta.\\
+	Calcoliamo adesso $Y_x^{EQ}$. \\
+	Se la specie è ultrarelativistica ($x \ll 1$) allora
+	\[
+	Y_x^{EQ} = \frac{n_x^{EQ}}{s} = \frac{\zeta(3)}{\pi^2} \tilde{g}T^3 \bigg(\frac{2 \pi^2}{45}  g_{*s}T^3\bigg)^{-1} = \frac{45 \zeta(3)}{2 \pi^4}\frac{\tilde{g}}{g_{*s}} = 0.278 	\frac{\tilde{g}}{g_{*s}}
+	\]
+	dove
+	\[
+	\tilde{g} = \begin{cases}
+		g,& \text{bosoni} \\
+		\frac34 g,& \text{fermioni} \\
+	\end{cases}
+	\]
+	Se, invece, la specie è non relativistica ($x \gg 1$) allora
+	\[
+	Y_x^{EQ} = g \bigg(\frac{m T}{2 \pi}\bigg)^\frac32 e^{-x} \bigg(\frac{2 \pi^2}{45}  g_{*s}T^3\bigg)^{-1} = 0.145\frac{g}{g_{*s}}x^\frac32 e^{-x}
+	\]
+	Notiamo che non c'è differenza tra bosoni e fermioni.
+\end{ex}
+
+\begin{ex}[Calcolo abbondanza specie fossili calde($x_F \ll 1$)]
+	Per $x_F \ll 1$ si ha che $Y \simeq Y_{EQ}, \, Y(\infty) = Y^{EQ}(x_F)$ allora
+	\[
+	n_x^0 = s_0 Y(\infty) = 825 \frac{\tilde{g}}{g_{*s}}\, cm^{-3} \qquad s_0 = 2970\, cm^{-3}
+	\]
+	Un esempio di queste specie sono i neutrini massivi che si disaccoppiano a $T_D \sim 1\, MeV$, allora
+	\[
+	\rho = s_0 Y(\infty) m_\nu 
+	\]
+	se la massa è maggiore della temperatura della CMB al tempo attuale. Quindi
+	\marginpar{$\rho_{crit} = 1.05 \cdot 10^4 h^2 \, eV \, cm^{-3}$} 
+	\[
+	\Omega_{\nu, 0} h^2 = \frac{\rho_0}{\rho_{crit}} = 7.83 \cdot 10^{-2} \frac{g_*(x_F)}{\tilde{g}} \, m\, eV^{-1} = \frac{m_\nu}{91.5 \, eV}
+	\]
+	Può allora $\Omega_\nu$ costituire la materia oscura? ($\Omega_{M, 0} = 0.26$)
+	\\
+	Imponendo $\Omega_{\nu, 0} \le \Omega_{M, 0}$ troviamo un limite per la massa dei neutrini
+	\[
+	m_\nu \le 13\, eV/c^2
+	\]
+	detto limite di Cowsik-Mc Clelland.\\
+	Tuttavia i neutrini sono troppo leggeri per poter essere dei buoni candidati per la materia oscura.
+\end{ex}
+
+\begin{ex}[Specie fossili fredde ($x_F \gg 1$)]
+	In questo caso
+	\[
+	Y^{EQ} =  0.145\frac{g}{g_{*s}}x^\frac32 e^{-x}
+	\]
+	Separiamo lo spazio in due e risolviamo l'equazione di Boltzmann separatamente.\\
+	Per $1 \ll x \ll x_F$ dall'equazione di Boltzmann segue che $Y \simeq Y^{EQ}, \, \Delta \simeq 0, \, \dot{\Delta} \simeq 0$  quindi
+	\[
+	\Delta \simeq -\frac{1}{2 \lambda_0} \frac{x^2}{f(x)} \frac{d\ln Y^{EQ}}{dx}
+	\]
+	Inoltre
+	\[
+	\frac{d\ln Y^{EQ}}{dx} = \frac{1}{Y^{EQ}} \frac{dY^{EQ}}{dx} = \frac{e^x}{x^\frac32} \bigg(\frac32 x^\frac12 e^{-x} - e^{-x} x^\frac32\bigg) = \bigg(-1 + \frac32 \frac1x\bigg) \to -1
+	\]
+	per $x \gg 1$.\\
+	Quindi
+	\[
+	\Delta \simeq \frac{1}{2 \lambda_0} \frac{x^2}{f(x)}
+	\]
+	Per $x \gg x_F$, invece, $Y^{EQ}$ decresce esponenzialmente, quindi $Y^{EQ}(x_F) \gg 1 $ mentre $Y^{EQ}(\infty) \to 0, \, \Delta \to Y$ allora
+	\[
+	\frac{d\Delta}{dx} = - \lambda_0 f(x)\frac{\Delta^2}{ x^2}
+	\]
+	Integrandola tra $x_F$ ed $\infty$ otteniamo che
+	\[
+	\frac{1}{\Delta_\infty} - \frac{1}{\Delta_F} = \lambda_0 \int_{x_F}^{\infty} \frac{f(x)}{x^2}\, dx
+	\]
+	quindi, per le approssimazioni di sopra,
+	\[
+	Y_\infty = \bigg[\lambda_0 \int_{x_F}^{\infty} \frac{f(x)}{x^2}\, dx\bigg]^{-1}
+	\]
+	Assumiamo adesso che $f(x)$ sia un polinomio
+	\[
+	f(x) = x^{-n} \begin{cases}
+		n = 0,& \text{onda s} \\
+		n = 1, & \text{onda p} \\
+	\end{cases}
+	\]
+	Allora
+	\[
+	Y_\infty = \frac{(n + 1)}{\lambda_0} x_F^{n + 1}
+ 	\] 
+ 	Possiamo quindi calcolare $\Omega_{x, 0}h^2$, infatti
+ 	\[
+ 	n_x^0 = s_0 Y_\infty \qquad \rho_0 = n_x^0 m_x
+ 	\]
+ 	perciò
+ 	\[
+ 	\Omega_{x, 0}h^2 \simeq 0.3 \bigg(\frac{g_*(x_F)}{100}\bigg)^{-\frac12} (n + 1) x_F^{n + 1} \bigg(\frac{10^{-38} \, cm^2}{\sigma_0}\bigg)
+ 	\]
+ 	Quindi $\Omega_{x, 0}h^2$ diventa rilevante se la sezione d'urto del processo è dell'ordine di quella per i processi deboli. Infatti per questi processi
+ 	\[
+ 	\sigma_0 \simeq G_F^2 m_x^2 \simeq 5 \cdot	10^{-38} \, cm^2 \bigg(\frac{m_x}{1\, GeV}\bigg)^{-2}
+ 	\]
+ 	Le particelle che interagiscono debolmente sono dette WIMP (Weakly Interactive Massive Particles).
+\end{ex}
+Per riassumere, da questi argomenti abbiamo dedotto che i neutrini non sono buoni candidati per la materia oscura in quanto troppo leggeri, tuttavia dei buoni candidati sembrano essere quelli delle specie fossili fredde.
+
+\section{Anisotropia di dipolo della CMB}
+Consideriamo la densità di fotoni nello spazio delle fasi 
+\[
+N_\gamma(p) = \frac{1}{e^{p/T} - 1} = \frac{N_{tot}}{d^3p d^3x}
+\]
+Il numero totale di fotoni è un invariante di Lorentz per cambi di sistema di riferimento ed allo stesso modo lo è $d^3p d^3x$ per il teorema di Liouville. Dunque $N_\gamma$ è un invariante così come $p/T$.\\
+La Via Lattea, e quindi la Terra, si muovono rispetto alla radiazione cosmica di fondo, perciò il momento dei fotoni misurato sulla Terra dipenderà dalla direzione di osservazione.\\
+Se supponiamo un boost lungo l'asse 3, con $\theta$ angolo tra il momento del fotone misurato nel laboratorio e l'asse 3, otteniamo che il momento del fotone misurato nel sistema di riferimento della CMB è $|p|$ e vale
+\[
+|p| = \gamma (1 + \beta \cos\theta)|p'|
+\]
+quindi, per invarianza,
+\[
+T' = \frac{1}{\gamma (1 + \beta \cos\theta)}T
+\]
+Per velocità non relativistiche $\gamma \simeq 1$. La differenza di temperatura è allora
+\[
+\Delta T = T' - T = -T \frac{\beta \cos\theta}{1 + \beta \cos \theta} \simeq -T(\beta \cos \theta - \beta^2 \cos^2 \theta)
+\]
+che possiamo riscrivere in termini dei polinomi di Legendre.
+\marginpar{$$P_1(x) = x$$ \\ $$P_2(x) = \frac12 (3x^2 - 1)$$}
+\[
+\frac{\Delta T }{T} = -\underbrace{\beta P_1(\cos\theta)}_{\text{dipolo}} + \underbrace{\frac23 \beta^2 P_2(\cos\theta) + \frac{\beta^2}{3}}_{\text{quadrupolo}} + \dots
+\]
+Possiamo usare quest'espressione per stimare $\beta$ e la direzione del dipolo infatti si osserva che
+\[
+\frac{\Delta T }{T} \sim 10^{-3}
+\]
+e che 
+\[
+v_{rot} \sim 215\,km/s \qquad v_{gal} = (627 \pm 22)\, km/s
+\]
+Studiamo adesso le anisotropie primarie che hanno origine nel primo universo. In questo caso le fluttuazioni sono dell'ordine di $10^{-5}$.\\
+Espandiamo quindi la differenza tra la temperatura della radiazione osservata in una data direzione e quella media, in armoniche sferiche.
+\[
+\Delta T(\hat{n}) =  T(\hat{n}) - T_0, \qquad T_0 = \frac{1}{4 \pi} \int T(\hat{n})d\Omega = 2.725\,K
+\]
+\[
+\ra \frac{\Delta T(\hat{n})}{T_0} = \sum_{l=0}^{\infty} \sum_{m = -l}^{l} a_{lm}Y_{lm}(\hat{n})
+\]
+con
+\marginpar{$$Y_{lm}^* = Y_{l,-m}$$ \\ $l = 0$: monopolo \\ $l=1$: dipolo \\ $l = 2$: quadrupolo}
+\[
+a_{lm} = \int d\Omega \frac{\Delta T(\hat{n})}{T_0} Y^*_{lm}
+\]
+Inoltre
+\[
+\frac{\Delta T(\hat{n})}{T_0} \in \bbr \ra a^*_{lm} = a_{l, -m}
+\]
+\begin{defn}[Correlatore a due punti o funzione di autocorrelazione]
+	\[
+	c(\theta) = <\frac{\Delta T(\hat{n})}{T_0}, \frac{\Delta T(\hat{n}')}{T_0}>
+	\]
+	dove la media è quella di ensamble e $\theta$ è tale che $\cos\theta = \hat{n} \cdot \hat{n}'$
+\end{defn}
+Decomponendo $c(\theta)$ in armoniche sferiche otteniamo che
+\[
+c(\theta) = \sum_{l = 0}^{\infty} \sum_{m = -l}^{l}c_l Y_{lm}(\hat{n})Y_{lm}(\hat{n}')
+\]
+con 
+\[
+c_l = \frac{1}{2l + 1} \sum_m <a^*_{lm}, a_{lm}>
+\]
+Poichè
+\[
+\sum_{m=-l}^{l} Y_{lm}(\hat{n})Y_{lm}(\hat{n}') = \frac{2l + 1}{4 \pi}P_l(\cos\theta)
+\]
+otteniamo che
+\[
+c(\theta) = \sum_l c_l \frac{2l + 1}{4 \pi} P_l(\cos\theta)
+\]
+che è detto spettro angolare di potenza delle fluttuazioni.
+\\
+Per fluttuazioni gaussiane i $c_l$ definiscono completamente le proprietà statistiche delle fluttuazioni. 
+\begin{oss}
+	Il correlatore è definito come una media di ensamble, tuttavia noi possiamo mediare unicamente sulle diverse posizioni del cielo. La discrepanza a piccole scale prende il nome di varianza cosmica, infatti
+	\[
+	<\bigg(\frac{c_l - c_l^{oss}}{c_l}\bigg)> = \frac{2}{2l + 1}
+	\]
+	che è significativa per l piccoli, dove quindi non vale più il teorema ergodico.
+\end{oss}
+
+\marginpar{Ultimo scattering: l'ultimo scattering che i fotoni effettuano prima di giungere a noi}
+Esistono due tipi di fluttuazioni, quelle primarie e quelle secondarie.\\
+Le fluttuazioni primarie sono quelle che si formano prima dell'ultimo scattering dei fotoni; quelle secondarie sono quelle che si formano dopo.\\
+Analizziamo le anisotropie primarie:
+\begin{enumerate}
+	\item \underline{Effetto Sachs-Wolfe}: Effetto Doppler gravitazionale generato dalle fluttuazioni del potenziale gravitazionale;
+	\item \underline{Effetto Doppler}: dovuto alle fluttuazioni di velocità del plasma primordiale;
+	\item \underline{Fluttuazioni intrinseche del plasma}: dovuto alle oscillazioni di pressione del plasma.
+\end{enumerate}
+
+\section{Effetto Sachs-Wolfe}
+Supponiamo di avere una fluttuazione del campo gravitazionale piccola (in quanto quelle misurate sono piccole)
+\[
+g_{00} = 1 +\frac{2 \phi}{c^2}
+\]
+Ricordiamo che il rapporto tra due frequenze è
+\[
+\frac{\nu_2}{\nu_1} = \frac{\Delta t_1}{\Delta t_2} = \sqrt{\frac{g_{00}(x_2)}{g_{00}(x_1)}} = \sqrt{\frac{1 + 2\phi_2}{1 + 2\phi_1}} \simeq 1 + \Delta \phi
+\]
+Allora
+\[
+\frac{\Delta \nu}{\nu} = \frac{\nu_2 - \nu_1}{\nu_1} = \Delta\phi
+\]
+Per i fotoni
+\[
+h \nu = k_B T
+\]
+quindi per il primo effetto Sachs-Wolfe abbiamo che
+\[
+\boxed{
+\frac{\Delta T}{T}^{(1)} = \Delta\phi
+}
+\]
+Tuttavia una variazione della metrica cambia anche come scorre il tempo e quindi si ha anche una variazione del redshift di last scattering.\\
+Sappiamo che
+\[
+1 + z_{LS} = \frac{a_0}{a_{LS}}
+\]
+Allora
+\[
+\frac{\delta z_{LS}}{1 + z_{LS}} = - \frac{\delta a}{a}\bigg|_{LS}
+\]
+Per chain rule
+\[
+\delta a_{LS} = \dot{a}_{LS} \Delta t
+\]
+con 
+\[
+\frac{\Delta t}{t} = - \Delta \phi
+\]
+per quanto visto prima.\\
+Allora
+\[
+\frac{\delta z_{LS}}{1 + z_{LS}} = \frac{\dot{a}}{a}\bigg|_{LS} t_{LS} \Delta\phi = H_{LS}t_{Ls}\Delta\phi
+\]
+Nel caso di universo dominato da materia, $H_{LS} = \frac23 \frac{1}{t_{LS}}$ quindi
+\[
+\frac{\delta z_{LS}}{1 + z_{LS}} = \frac23 \Delta\phi
+\]
+ma un aumento di $z_{LS}$ si traduce in una diminuzione di $T_{LS}$ quindi abbiamo che il secondo effetto Sachs-Wolfe è 
+\[
+\boxed{
+	\frac{\Delta T}{T}^{(2)} = -\frac23 \Delta\phi
+}
+\]
+Combinando i due effetti otteniamo che 
+\[
+\boxed{
+	\frac{\Delta T}{T}^{SW} = \frac13 \Delta\phi
+}
+\]
+Il $\delta\phi$ produce poi anche una buca di potenziale in cui i barioni ed i fotoni si accoppiano mediante scattering Thomson dando origine ad un fluido di plasma. L'aumento della densità dei fotoni dovuto alla buca produce una pressione di radiazione che si oppone all'ingresso di nuovi fotoni e dà origine alle oscillazioni delle onde di plasma.\\
+Sviluppiamo il $\delta\phi$ con Fourier
+\[
+\delta\phi(\boldsymbol{x}) = \int d^3q e^{i\boldsymbol{q}\boldsymbol{x}}\delta\phi_{\boldsymbol{q}}
+\]
+Possiamo poi espandere l'esponenziale con Legendre
+\marginpar{Funzioni di Bessel sferiche: $$j_l(y) = \sqrt{\frac{2\pi}{y}}J_{l + \frac12}(y)$$}
+\[
+e^{i\boldsymbol{q}\boldsymbol{x}} = \sum_{l = 0}^{\infty} (2l + 1)i^l P_l(\hat{q} \hat{n})j_l(qr)
+\]
+Allora
+\[
+\frac{\Delta T}{T}^{SW} = \frac13 \sum_l(2l + 1) i^l \int d^3q \delta\phi_{\boldsymbol{q}} j_l(q r_{LS})P_l(\hat{q}\hat{n})
+\]
+Sebbene, poi, $\delta\phi (\boldsymbol{x})$ dipenda dalla posizione, la sua distribuzione di probabilità vista da osservatori in diverse parti dell'universo è invariante sotto rotazioni e traslazioni, quindi
+\[
+<\delta\phi_{\boldsymbol{q}} \delta\phi_{\boldsymbol{q}'}> = P_{\phi}(q)\delta^3(\boldsymbol{q} + \boldsymbol{q}')
+\]
+quindi nello spazio delle configurazioni $<\delta\phi(\boldsymbol{x}), \delta\phi(\boldsymbol{y})>$ dipende solo da $\boldsymbol{x} - \boldsymbol{y}$ che è equivalente a dire che c'è isotropia su larga scala.\\
+Inoltre poichè $\delta\phi(\boldsymbol{x}) \in \bbr$ allora $\delta\phi_{\boldsymbol{q}}^* = \delta\phi_{-\boldsymbol{q}}$.\\
+Per l'ortogonalità dei polinomi di Legendre
+\[
+\int d\Omega_{\hat{q}} P_l(\hat{n}\hat{q}) P_{l'}(\hat{n}'\hat{q}) = \frac{4 \pi}{2l + 1}\delta_{ll'} P_l(\hat{n}\hat{n}')
+\]
+quindi
+\marginpar{$$P_l(-q) = (-1)^l P_l(q)$$}
+\begin{align*}
+<\frac{\Delta T(\hat{n})}{T_0}, \frac{\Delta T(\hat{n}')}{T_0}>_{SW} &= \frac{4 \pi}{9} \sum_l (2l + 1) P_l({\hat{n}\hat{n}'})\int dq q^2 j_l^2(q r_{LS})P_{\phi}(q) \\
+&= \sum_l c_l \bigg(\frac{2l + 1}{4\pi}\bigg)  P_l({\hat{n}\hat{n}'}) \\
+\end{align*}
+da cui segue che
+\[\boxed{
+(c_l)_{SW} = \frac{16 \pi^2}{9} \int dq q^2 j_l^2(q r_{LS})P_{\phi}(q)
+}
+\]
+Lo spettro di potenza possiamo poi scriverlo come un polinomio del tipo
+\[
+P_{\phi} = N_{\phi}^2 q^{n- 4}
+\]
+Dalle osservazioni troviamo $n = 1$, detto spettro di Harrison-Zel'dobich, da cui
+\[
+(c_l)_{SW} = \frac{8 \pi^2}{9}N_{\phi}^2 \frac{1}{l(l + 1)}
+\]
+Le funzioni di Bessel sferiche $j_l(z)$ hanno poi un picco per $z \simeq l$ per $l \gg 1$(che è il caso a cui siamo interessati per via del problema della varianza cosmica). Quindi anche i $c_l$ sono dominati da valori di $q$ tali che $q \sim l/r_{LS}$. \\
+\marginpar{$k_{LS}$ è così definito perchè $a(t_{LS})\boldsymbol{x}$ misura la distanza propria a questo tempo.}
+Detto $k_{LS}$ il numero d'onda fisico al tempo di last scattering, $k_{LS} = q/a(t_{LS})$, quindi per quanto detto prima
+\[
+k_{LS} = \frac{l}{d_A(t_{LS})}
+\]
+dove $d_A(t_{LS})$ è la dimensione dell'orizzonte di particelle al tempo di last scattering che possiamo dunque ricavare dal primo picco.\\
+Le onde di plasma sono poi onde di pressione quindi si propagano alla velocità del suono che in questo caso risulta essere
+\marginpar{$$\frac{\delta\rho_{bar}}{\delta\rho_{rad}} = R$$}
+\[
+c_s = \sqrt{\frac{\delta p}{\delta \rho}} = \sqrt{\frac{\delta p_{rad}}{\delta \rho_{bar} + \delta\rho_{rad}}} = 
+\sqrt{\frac{1/3}{\frac{\delta\rho_{bar}}{\delta\rho_{rad}} + 1}} \equiv \sqrt{\frac{1}{3(1 + R)}}
+\]
+$R$ può essere espresso come
+\marginpar{$$\frac{\delta\rho_{bar}}{\rho_{bar}} = 3\frac{\delta T}{T}$$ \\ $$\frac{\delta\rho_{rad}}{\rho_{rad}} = 4\frac{\delta T}{T}$$}
+\[
+R = \frac{\delta\rho_{bar}}{\delta\rho_{rad}} = \frac34 \frac{\rho_{bar}}{\rho_{rad}}
+\]
+Sia $\lambda$ la lunghezza d'onda delle fluttuazioni del campo gravitazionale, allora
+\[
+\theta = \frac{\lambda}{\eta_0 - \eta_{LS}}
+\]
+L'orizzonte sonoro avrà poi $\lambda \sim c_s \eta_{LS}$. Al tempo di last scattering, l'universo è dominato da materia, che ci dice che $w = 0 \ra a \propto \eta^2$, tuttavia il plasma di barioni e fotoni è ultrarelativistico, quindi la sua temperatura andrà come $T \propto 1/a$. Combinando le due relazioni otteniamo che l'angolo della superficie di orizzonte è 
+\marginpar{$$T_{LS} \sim 3000\,K$$}
+\[
+\theta_H = c_s\bigg(\frac{T_0}{T_{LS}}\bigg)^{1/2} = 1 \ra l_H \sim\frac{\pi}{\theta_H} \sim 180
+\]
+Una particella sulla superficie di orizzonte sonoro si muoverà secondo la legge
+\[
+c_s dt = a(t) dr
+\]
+da cui integrando si ottiene che
+\[
+r_s = \int_{0}^{t_{LS}} c_s(t) \frac{dt}{a(t)}
+\]
+Possiamo allora calcolare l'orizzonte acustico come
+\[
+d_H(t_{LS}) = a(t_{LS})r_s = a(t_{LS}) \int_{0}^{t_{LS}}\frac{dt}{a \sqrt{3(1 + R)}}
+\]
+Osserviamo adesso che, dalla definizione,
+\[
+R \propto a \ra \frac{dR}{R} = \frac{da}{a} = H dt
+\]
+quindi
+\[
+d_H(t_{LS}) = a(t_{LS}) \int_{0}^{R_{LS}} \frac{dR}{R H a \sqrt{3( 1+ R)}} = R(t_{LS}) \int_{0}^{R_{LS}} \frac{dR}{R^2 H \sqrt{3( 1+ R)}}
+\]
+$H$ può essere poi espresso come
+\[
+H^2 = H_0^2 \bigg[\Omega_{M, 0}\bigg(\frac{R_0}{R}\bigg)^3 + \Omega_{R, 0}\bigg(\frac{R_0}{R}\bigg)^4\bigg]
+\]
+Definiamo
+\[
+R_{eq} = R_0 \frac{\Omega_{R, 0}}{\Omega_{M, 0}}
+\]
+allora
+\marginpar{$$R_0 = \frac34 \frac{\Omega_{B, 0}}{\Omega_{R, 0}} \simeq 10^3$$ \\ $$R_{LS}\sim 10^3 \frac{1}{1 + z_{LS}} $$ \\ $$R_{eq} \sim 0.21 $$} 
+\[
+d_H(t_{LS}) = \frac{2}{H_0 \sqrt{3 R_0 \Omega_{M, 0}}}\frac{1}{\sqrt{(1 + z_{LS})^3}} \ln\bigg(\frac{\sqrt{1 + R_{LS}} + \sqrt{E_{eq} + R_{LS}}}{1 + \sqrt{R_{eq}}}\bigg)
+\]
+Osserviamo adesso che il contributo dominante ai $c_l$ è dato da $k \sim l/d_A$. Chiamando $k_H = \frac{1}{d_H}$ otteniamo che l'$l$ corrispondente al vettore d'onda dell'orizzonte è
+\[
+k_H = \frac{l_*}{d_A} = \frac{1}{d_H} \ra l_* = \frac{d_A}{d_H}
+\]
+Sapendo che $\Omega_{M, 0} \sim 0.26$, $\Omega_{B, 0} \sim 0.05$ troviamo che
+\[
+l_* \sim 200
+\]
+da cui segue che il primo picco della CMB corrisponde al tempo dell'ultimo scattering.\\
+L'equazione per le fluttuazioni del fluido barioni-fotoni è
+\[
+\delta_\gamma'' + \frac{k c_s^2}{a t_\gamma}\bigg(\frac{16}{15} + \frac{R^2}{1 + R}\bigg) \delta_\gamma' + k^2c_s \delta_\gamma = 0
+\]
+con 
+\[
+t_\gamma = n_e \sigma_T
+\]
+Allora
+\[
+\delta_\gamma \sim \frac{e^{-k^2/k_D^2}}{(1 + R)^14} 
+\begin{cases}
+	\cos(k r_{LS}) \\
+	\sin(k r_{LS}) \\
+\end{cases}
+\]
+con
+\[
+k_p r_{LS} = p \pi
+\]
+dove $p$ è la posizione dei picchi.\\
+Vediamo adesso i principali effetti dei parametri cosmologici
+\marginpar{Spiegare meglio}
+\begin{enumerate}
+	\item Cambiare $\Omega_B$ fa cambiare R, $c_s$, la posizione dei picchi e la loro ampiezza;
+	\item Cambiare $\Omega_M$ significa cambiare $z_{EQ}$ e $d_H$.
+	\item Cambiare $H_0$ fa cambiare $d_H$
+	\item Cambiare $\Omega_\Lambda$ produce, invece, effetti secondari
+\end{enumerate}
+Per scattering Thomson, poi, la radiazione si polarizza.\\
+Il raggio di Hubble $L_H(t)$, che indica la massima distanza percorsa dai fotoni dall'inizio dei tempi al tempo $t$ è 
+\[
+L_H(t) = \frac{c}{H(t)} = \frac{1}{H(t)} \qquad H^2 \propto \rho \propto T^3
+\]
+Allora possiamo calcolare
+\[
+\frac{L_H(t_0)}{L_H(t_{LS})} = \bigg(\frac{T_{LS}}{T_0}\bigg)^{\frac32}
+\]
+Questo implica che al tempo attuale ci sono $10^5$ regioni che erano causalmente sconnesse al tempo di ultimo scattering. Se erano sconnesse, perchè hanno la stessa temperatura? Questo viene detto problema degli orizzonti.\\
+\section{Horizon crossing}
+Quando la lunghezza d'onda della perturbazione diventa più piccola di quella dell'orizzonte di particella, allora la perturbazione entra dentro l'orizzonte.
+\[
+\lambda^{fis} \propto \frac{1}{q^{fis}} = \frac{a}{q} \propto \begin{cases}
+	t^\frac12,& RD \\
+	t^\frac23,& MD \\
+\end{cases}
+\]
+mentre 
+\[
+\lambda_H = \propto L_H \propto t
+\]
+\marginpar{Inserire immagine}
+Il punto in cui le due espressioni si intersecano è detto Horizon Crossing.\\
+Se condiseriamo $q$ comovente dobbiamo confrontarlo con $\tilde{L}_H = L_H/a$ da cui toviamo che la condizione di horizon crossing per $\lambda$ comovente sarà data da 
+\[
+\lambda = \frac{1}{aH}
+\]
+Definiamo 
+\[
+q_{EQ} = H(t_{EQ})a_{EQ}
+\]
+allora
+\[
+\frac{q}{a} \bigg|_{EQ} = 1.66\sqrt{g_*}\frac{T^2}{M_{Pl}}\simeq 2.1\cdot 10^{-20}(1 + z_{EQ})^2
+\]
+con
+\[
+1 + z_{EQ} = \frac{\Omega_{M, 0}}{\Omega_{R, 0}} = 2\cdot 10^4 \Omega_{M, 0} h^2
+\]
+allora
+\[
+\frac{q}{a}\bigg|_{EQ} = 1.7 \cdot 10^{-11}(\Omega_{M, 0} h^2)^2\,s^{-1}
+\]
+A questo corrisponde una lunghezza d'onda pari a 
+\[
+\lambda_0^{fis} = \frac{2\pi a_0}{q_{EQ}} = \frac{2\pi (1 + z_{EQ})a_{EQ}}{q_{EQ}} = 85(\Omega_{M, 0} h^2)^2\, Mpc
+\]
+Questo ci dice che le lunghezze d'onda entrate nell'orizzonte sono enormi, perciò le fluttuazioni irrilevanti devono essere entrate prima.\\
+Calcoliamo adesso $l_{EQ}$.
+\[
+l_{EQ} = q_{EQ} r_{LS} = \underbrace{\frac{q_{EQ}}{a_{EQ}}}_{H_{EQ}} \overbrace{\frac{a_{EQ}}{a_0}}^{(1 + z_{EQ})^{-1}} \underbrace{\frac{a_0}{a_{LS}}}_{1 + z_{LS}}
+\overbrace{a_{LS} r_{LS}}^{d_A(r_{LS})}
+\]
+quindi
+\[
+\boxed{
+l_{EQ} = H_{EQ} \bigg(\frac{1 + z_{LS}}{1 + Z_{EQ}}\bigg)d_A(r_{LS}) \simeq 140
+}
+\]
+usando i parametri $\Lambda$CDM.
+
+\section{Particle Horizon}
+L'orizzonte di particelle divide l'universo in una zona che può scambiare particelle con noi ed una che non può. Il raggio dell'orizzonte di particella è
+\[
+R_H(t) = a(t)\int_{t_0}^{t}\frac{dt'}{a(t')}
+\]
+Se $a(t) \propto t^n$ allora ($n \not= 1$)
+\[
+R_H(t) = \frac{t^n}{1 - n} (t^{1 - n} - t_0^{1 - n})
+\]
+Se $t_0 \ll t$ allora $R_H(t) = \frac{t}{1 - n}$
+
+\section{Problemi della cosmologia dell'Hot Big Bang}
+\subsection{Flatness Problem}
+Consideriamo la costante cosmologica nulla e che l'equazione di Einstein sia valida durante tutte le fasi dell'evoluzione dell'universo. Ricordando che 
+\[
+\Omega_k = -\frac{k}{a^2 H^2}
+\]
+otteniamo che per $k = 0$ (universo piatto) $\Omega_k = 0$ a tutti i tempi, altrimenti abbiamo che l'evoluzione dipende fortemente dalla fase considerata.\\
+Nella fase dominata dalla materia 
+\[
+a \propto t^{2/3} \ra \Omega_k \propto a \propto T
+\]
+mentre nella fase dominata dalla radiazione
+\[
+a \propto t^{1/2} \ra \Omega_k \propto a^2 \propto T^{-2}
+\]
+In entrambi i casi $\Omega_k$ aumenta nel tempo.\\
+Dalle osservazioni si deduce che $\Omega_{k, 0} < 0.005$ e poichè
+\[
+\frac{\Omega_{k, 0}}{\Omega_{k, EQ}} = \frac{T_{EQ}}{T_0} \sim 10^4
+\]
+troviamo che $\Omega_{k, EQ} < 10^{-4}$. Analogamente
+\[
+\frac{\Omega_{k, EQ}}{\Omega_{k, BBN}} = \bigg(\frac{T_{BBN}}{T_EQ}\bigg)^2 \sim 10^12
+\]
+quindi  $\Omega_{k, BBN} < 10^{-16}$. Andando ancora più indietro nel tempo troviamo che
+\marginpar{GUT: Grand Unified Theories}
+\[
+ \Omega_k(T_{GUT}) < 10^{-55}
+\]
+\[
+ \Omega_k(T_{Pl}) < 10^{-61}
+\]
+Una così grande precisione nelle condizioni iniziali è detta Fine Tuning Problem.\\
+Guardiamo adesso l'evoluzione di $\Omega_k$.
+\begin{oss}
+	Sia $x = \ln(a/a_0)$, allora 
+	\[
+	H = \frac{\dot{a}}{a} = \frac1a \frac{da}{dt} = \frac{d}{dt} \ln{a} 
+	\]
+	quindi
+	\[
+	dt = \frac{1}{H} d\ln(a) = \frac1H dx
+	\]
+	Allora per una generica grandezza $A$ abbiamo che
+	\[
+	\dot{A} = H A' \qquad A' = \frac{dA}{dx}
+	\]
+\end{oss}
+Consideriamo la seconda equazione di Friedmann con $\Lambda = 0$
+\[
+\frac{\ddot{a}}{a} = -\frac{4 \pi G}{3} (\rho + 3p) = -\frac{4 \pi G}{3} \rho (1 + 3w)
+\]
+Ricordiamo che il parametro di decelerazione è
+\[
+q = -\frac{1}{H^2} \frac{\ddot{a}}{a}
+\]
+quindi riscrivendo l'equazione di Friedmann in termini di $q$ troviamo che 
+\[
+2q = (1 + 3w)\Omega(t)
+\]
+Osserviamo adesso che
+\[
+\dot{H} = \frac{\ddot{a}}{a} - \bigg(\frac{\dot{a}}{a}\bigg)^2 = \frac{\ddot{a}}{a} - H^2 \ra \frac{\dot{H}}{H^2} = -(1 + q)
+\]
+Allora
+\[
+\dot{\Omega}_k = k\bigg[\frac{1}{a^2}\bigg(\frac{2\dot{H}}{H^3}\bigg) + \frac{1}{H^2}\bigg(\frac{2\dot{a}}{a^3}\bigg)\bigg] = -2\Omega_k \bigg(\frac{\dot{H}}{H} + \frac{\dot{a}}{a}\bigg) = -2\Omega_k H (1 + \frac{\dot{H}}{H^2}) = 2\Omega_k H q
+\]
+Ricordando adesso che
+\[
+\dot{A} = HA'
+\]
+troviamo che
+\[
+\Omega_k' = 2 \Omega_k q = \Omega_k (1 + 3w) \Omega(t) = \Omega_k(1 - \Omega_k)(1 + 3w)
+\]
+da cui si deduce che
+\[
+\Omega_k = 0 \text{ è un punto di equilibrio instabile se } (1 + 3w)>0
+\]
+\[
+\Omega_k = 0 \text{ è un punto di equilibrio stabile se } (1 + 3w)<0
+\]
+Il flatness problem può essere risolto se abbiamo una fase di espansione accelerata abbastanza lunga detta inflazione.\\
+Consideriamo $H \simeq c.te$ allora
+\[
+\frac{\Omega_k(T_f)}{\Omega_k(T_i)} = \bigg(\frac{a_i}{a_f}\bigg)^2 = e^{-2N}
+\]
+dove 
+\[
+N = \ln\bigg(\frac{a_f}{a_i}\bigg)
+\]
+è detto numero totale di e-folds della fase inflazionaria e ci dice di quanto il fattore di scala è aumentato durante questa fase.\\
+Nel nostro caso, per avere $\Omega_k (T_f) \le 10^{-60}$ al periodo di fine inflazione, possiamo ipotizzare $\Omega_k(T_i) \sim 1$ ad inizio inflazione, che è un valore più accettabile; da cui segue che $N \ge 60$.\\
+L'inflazione risolve il problema in quanto il raggio di Hubble comovente $1/Ha$, che dà la dinamica di $\Omega_k$ diminuisce durante l'inflazione poichè lo zero è un punto stabile.
+\subsection{Problema dell'orizzonte}
+Ricordiamo che in cosmologia standard i fotoni si disaccoppiano dal resto della materia a $T \simeq 0.3\,eV$ a cui corrisponde un redshift $z\simeq1100$. Quest'epoca viene detta del last scattering in quanto dopo di essa i fotoni viaggiano indisturbati (in prima approssimazione) sino a noi.\\
+Guardando l'universo osservabile con $R_H(t_0) = 1/H_0$ vediamo omogeneità ed isotropia della temperatura dei fotoni.\\
+Ricordiamo che $\lambda \propto a$, allora
+\[
+\lambda_{H_0}(t_{LS}) = R_H(t_0) \bigg(\frac{a_{LS}}{a_0}\bigg) = \frac{1}{H_0(1 + z_{LS})}
+\]
+Dal last scattering ad oggi l'universo è stato dominato da materia non relativistica, quindi
+\[
+H^2 \propto \rho_{NR} \propto a^{-3}
+\]
+Allora
+\[
+R_H(t_{LS}) = \frac{1}{H_{LS}} = \frac{1}{H_0} \bigg(\frac{a_{LS}}{a_0}\bigg)^\frac32 = R_H(t_0) \bigg(\frac{a_{LS}}{a_0}\bigg)^\frac32
+\]
+da cui segue che 
+\[
+\frac{1}{H_{LS}} \ll \lambda_{H_0}(t_{LS})
+\]
+Facendo il rapporto tra i volumi otteniamo che
+\[
+(H_{LS}\lambda_{H_0}(t_{LS}))^3 = (1 + z_{LS})^\frac32 \simeq 10^5
+\]
+Quindi c'erano $10^5$ regioni sconnesse alla superficie di last scattering che corrispondono all'universo osservabile oggi. La soluzione al problema dell'orizzonte è l'universo accelerato, cioè bisogna assumere un periodo di inflazione.\\
+Durante l'inflazione $H_I$ è circa costante per cui riusciamo a racchiudere nel raggio di Hubble tutte le lunghezze d'onda che erano troppo grandi all'inizio dei tempi.\\
+Ipotizziamo infatti che esiste un tempo di fine inflazione in cui il raggio di Hubble sia maggiore di tutte le scale $\lambda$ di interesse
+\[
+R_H(t_f) \ge \lambda
+\]
+Ricordiamo che
+\[
+R_H(t_f) = a(t_f) \int_{t_i}^{t_f}\frac{dt'}{a(t')}
+\]
+dove , per universo accelerato,
+\[
+a(t)  = a(t_i)exp(H_I(t - t_i)) = a(t_f)exp(H_I(t - t_f))
+\]
+Allora
+\[
+R_H(t_f) = a(t_f) \int_{t_i}^{t_f}\frac{dt'}{a(t_f)}exp(H_I(t_f - t'))
+\]
+\[
+R_H(t_{LS}) = \frac{a_{LS}}{a_{t_f}H_I}(e^N - 1)
+\]
+Per avere poi isotropia al tempo di last scattering deve essere
+\[
+R_H(t_{LS}) > \lambda_{H_0}(t_{LS})
+\]
+da cui segue che, assumendo $e^N \gg 1$
+\[
+\boxed{
+e^N > \frac{H_I}{H_0}\frac{a(t_f)}{a_0}
+}
+\]
+Osserviamo che per risolvere il problema della piattezza abbiamo bisogno della stessa condizione, infatti essendo $k$ una costante
+\[
+|\Omega_{k, 0}|(a_0 H_0)^2 = |\Omega_{k, t_f}|(a(t_f) H_I)^2
+\]
+e poichè
+\[
+\frac{\Omega_k(t_f)}{\Omega_k(t_i)} = e^{-2N}
+\]
+otteniamo che
+\[+
+|\Omega_{k, 0}| = e^{-2N}|\Omega_k(t_i)| \bigg(\frac{a(t_f)H_I}{a_0 H_0}\bigg)^2
+\]
+Assumendo $|\Omega_k(t_i)|\simeq 1$ si ha che
+\[
+|\Omega_{k, 0}| < 1 \ra e^N > \frac{H_I}{H_0}\frac{a(t_f)}{a_0}
+\]
+che è la stessa condizione trovata prima.\\
+Il raggio di Hubble è quindi un modo diverso di vedere se due particelle sono state causalmente connesse nel passato; alternativamente è la distanza percorsa dai fotoni nel corso di un expansion rate.
+
+\section{Slow-rolling Inflation}
+Consideriamo un'azione del tipo
+\[
+S = \int\,d^4x\sqrt{-g}\Lagr = \int\,d^4x\sqrt{-g}\bigg[\frac12 g^{\mu \nu}\partial_\mu\phi \partial_\nu\phi - V(\phi)\bigg]
+\]
+con $\sqrt{-g} = a^3$ per la metrica FRW. Allora le equazioni del moto sono
+\[
+\partial^\mu\bigg(\frac{\delta(\sqrt{-g}\Lagr)}{\delta(\partial^\mu \phi)}\bigg) - \frac{\delta(\sqrt{-g}\Lagr)}{\delta\phi} = 0
+\]
+da cui segue che
+\[
+\ddot{\phi} + 3H\dot{\phi} - \frac{\nabla^2 \phi}{a^2} + V'(\phi) = 0
+\]
+\marginpar{Fare il calcolo}
+Calcolando, poi, il tensore energia-impulso si può trovare la densità di energia del campo e la sua pressione.
+\\
+Si vede così che, se $\nabla^2 \phi$ domina, allora $p_\phi = -\frac13 \rho_\phi$, che non è abbastanza per avere un universo accelerato.\\
+Trascuriamo allora $\nabla^2 \phi$. Otteniamo così
+\[
+\phi(\boldsymbol{x},t) = \phi_0(t) + \delta\phi(\boldsymbol{x}, t)
+\]
+con\\
+$\phi_0(t)$: campo classico con lunghezza d'onda infinita\\
+$\delta\phi(\boldsymbol{x}, t)$: fluttuazione quantistica intorno a $\phi_0(t)$.
+\\
+Se la fluttuazione quantistica è piccola rispetto al campo, allora possiamo trascurare il gradiente del campo, inoltre se il potenziale è più grande della velocità del campo ($V(\phi) \gg \dot{\phi}^2$, detta prima condizione di piattezza) allora  $p_\phi = - \rho_\phi$. Da questa condizione, detta di Slow Roll, deduciamo che il campo deve scendere lentamente verso il minimo del potenziale. Il campo $\phi$ viene anche detto inflatone.
+\\
+Quindi con un campo scalare la cui energia domina l'espansione dell'universo e per cui l'energia potenziale domina sul termine cinetico abbiamo espansione accelerata.
+\\
+Dalla prima equazione di Friedmann ottengo che
+\[
+H^2 = \frac{8 \pi G}{3}(\frac12 \dot{\phi}^2 + V(\phi))
+\]
+allora
+\[
+\frac{d}{dt}H^2 = 2H\dot{H} = \frac{8 \pi G}{3}(\dot{\phi}\ddot{\phi} + V'(\phi)\dot{\phi})
+\]
+Sostituendo $V'(\phi) = -\ddot{\phi} - 3H\dot{\phi}$ otteniamo che
+\[
+ 2H\dot{H} = \frac{8 \pi G}{3}(-3 H \dot{\phi}^2)
+\]
+Allora
+\[
+\boxed{
+\dot{H} = -4\pi G\dot{\phi}^2
+}
+\]
+Dalla seconda equazione di Friedmann, invece, otteniamo che
+\[
+\frac{\ddot{a}}{a} = -\frac{4 \pi G}{3} (\rho + p) = -\frac{4 \pi G}{3}(2\dot{\phi}^2 - 2V(\phi)) = -\frac{4 \pi G}{3}(3\dot{\phi}^2 + (-\dot{\phi}^2 - 2V(\phi))) = \dot{H} + H^2
+\]
+Chiamiamo 
+\[
+\boxed{
+\epsilon = -\frac{\dot{H}}{H^2}
+}
+\]
+primo parametro di slow roll.
+\begin{oss}
+	Per $\epsilon \ge 1$ l'inflazione si ferma.\\
+	Si ha inflazione se e solo se $|\epsilon| < 1$
+	\[
+	\dot{H} = 4 \pi G \dot{\phi}^2 \ll H^2 = \frac{8 \pi G}{3}(\frac12 \dot{\phi}^2 + V(\phi))
+	\]
+	quindi $|\epsilon| < 1$ e la condizione di slow roll sono equivalenti.	
+\end{oss}
+\begin{oss}
+	\marginpar{Q. Perchè?}
+	$\epsilon$ è anche una misura di quanto siamo vicini all'universo di de Sitter
+\end{oss}
+Definiamo poi
+\[
+\boxed{
+\delta = -\frac{\ddot{\phi}}{H \dot{\phi}} < 1
+}
+\]
+detto secondo parametro di slow roll.\\
+$\delta$ misura la variazione di $\epsilon$ per e-fold.\\
+$\delta \ll 1$ equivale a dire che, considerando le equazioni del moto,
+\[
+3H\dot{\phi} + V'(\phi) = 0 \ra \dot{\phi} = - \frac{V'}{3H} = .\frac{V'}{\sqrt{24 \pi G V}}
+\]
+quindi 
+\[
+|\epsilon| = \frac{|\dot{H}|}{H^2} \propto \frac{\dot{\phi}^2}{V} \ll 1 
+\]
+per quanto detto prima, e
+\[
+|\epsilon| = \frac{1}{16 \pi G} \bigg(\frac{V'}{V}\bigg)^2
+\]
+da cui segue che
+\[
+\boxed{
+\frac{1}{16 \pi G}\bigg(\frac{V'}{V}\bigg)^2 \ll 1
+}
+\]
+detta prima condizione di piattezza.\\
+Parto ora da $\dot{\phi} = -V'/3H,\,(\delta \ll 1)$ allora
+\[
+\ddot{\phi} = -\frac{V''\dot{\phi}}{3H} + \frac{V'\dot{H}}{3 H^2} = -\frac{V''}{3H}\bigg(-\frac{V'}{3H}\bigg) + \frac{V'}{3} \bigg(\frac{V'}{V}\bigg)^2\frac{1}{16 \pi G}
+\]
+Allora, dalla prima condizione di piattezza segue che
+\[
+\delta \ll 1 \ra |\ddot{\phi}| \ll |H\dot{\phi}| = \frac13 V' \ra |V''| \ll 3H^2
+\]
+Otteniamo così la seconda condizione di piattezza
+\[
+\bigg|\frac{V''}{V}\bigg| \ll 8 \pi G
+\]
+Se $\epsilon, \delta \ll 1$ abbiamo un'espansione vicina a de Sitter, non esattamente esponenziale, ma esponenzialmente grande.
+\\
+L'inflazione termina poi quando $\epsilon(\phi(t_f)) \simeq 1$, allora
+\[
+N(\phi) \equiv \ln\frac{a_f}{a} = \int_{t}^{t_f}H\,dt' = \int_{\phi}^{\phi_f}\frac{H}{\dot{\phi}}\,d\phi
+\]
+che, usando le condizioni di slow roll, possiamo scrivere come
+\[
+N(\phi) = \int_{\phi}^{\phi_f} \bigg(\frac{8 \pi G}{3}V\cdot \frac{24 \pi G V}{V'^2}\bigg)^\frac12\,d\phi = 8 \pi G \int_{\phi}^{\phi_f}\frac{V}{V'}\, d\phi
+\]
+Dalla prima condizione di piattezza otteniamo che
+\[
+N_{tot} \gg \sqrt{4 \pi G}|\phi_f - \phi_i|
+\]
+Per $\epsilon, \delta \ll 1$ abbiamo allora che il numero totale di e-folds associato al modello considerato è $\gg \sqrt{4 \pi G}\Delta\phi$, dove $\Delta\phi$ è la variazione del campo durante la fase inflazionaria.\\
+Tuttavia la condizione può essere vista in modo inverso.\\
+Possiamo imporre $\phi_i$ tale da avere il numero di e-folds minimo per risolvere i problemi dell'Hot Big Bang
+\[
+\Delta\phi \ll \frac{N_{tot}}{\sqrt{4 \pi G}} = \sqrt{2}NM_{Pl} = 10^{20}\,GeV
+\]
+
+\end{document}
