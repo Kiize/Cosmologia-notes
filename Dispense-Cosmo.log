@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.17)  2 FEB 2022 17:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.17)  2 FEB 2022 17:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -454,20 +454,20 @@ File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 (./Dispense-Cosmo.aux)
 \openout1 = `Dispense-Cosmo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 
 (c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -525,52 +525,48 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 53.
 
 (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 53.
 
 
 (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [1
 
-LaTeX Warning: No \author given.
+{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
 
-[1
-
-{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-[4] [5]
 
 LaTeX Warning: Marginpar on page 6 moved.
 
 [6]
-Overfull \hbox (7.20752pt too wide) in paragraph at lines 558--560
+Overfull \hbox (7.20752pt too wide) in paragraph at lines 559--561
 []\T1/cmr/m/n/10 Dalla con-ser-vazione di $\OML/cmm/m/it/10 T[]$ \T1/cmr/m/n/10
  nella met-rica FRW ot-te-ni-amo l'equazione di con-ser-vazione dell'energia. 
  []
 
 [7]
-Overfull \hbox (12.71431pt too wide) in paragraph at lines 595--596
+Overfull \hbox (12.71431pt too wide) in paragraph at lines 596--597
 []\T1/cmr/m/n/10 Se sup-poni-amo adesso un'equazione di stato per il flu-ido de
 l tipo $\OML/cmm/m/it/10 p \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 w^^Z$\T1/cmr/m/n/
 10 , sos-tituendo nell'equazione
  []
 
 [8] [9] [10] [11] [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 1011--1012
+Underfull \hbox (badness 10000) in paragraph at lines 1012--1013
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1086
+Underfull \hbox (badness 10000) in paragraph at lines 1086--1087
 
  []
 
 [15]
-Overfull \hbox (4.44763pt too wide) in paragraph at lines 1111--1113
+Overfull \hbox (4.44763pt too wide) in paragraph at lines 1112--1114
 \T1/cmr/m/n/10 con $\OML/cmm/m/it/10 < v >\OMS/cmsy/m/n/10 ^^X \OT1/cmr/m/n/10 
 10[][]$ \T1/cmr/m/n/10 si ot-ten-gono tem-per-a-ture nel range di $\OT1/cmr/m/n
 /10 10[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 10[] \OML/cmm/m/it/10 K$ \T1/cmr/
@@ -578,7 +574,7 @@ m/n/10 che cor-rispon-dono all'emissione
  []
 
 
-Overfull \hbox (5.68706pt too wide) in paragraph at lines 1127--1127
+Overfull \hbox (5.68706pt too wide) in paragraph at lines 1128--1128
 []\T1/cmr/bx/n/14.4 MACHOS (Mas-sive As-tro-phys-i-cal Com-pact Halo Ob-jectS) 
 
  []
@@ -592,7 +588,7 @@ LaTeX Warning: Marginpar on page 17 moved.
 LaTeX Warning: Marginpar on page 24 moved.
 
 [24] [25] [26] [27] [28] [29] [30] [31] [32] [33]
-Underfull \hbox (badness 10000) in paragraph at lines 2356--2358
+Underfull \hbox (badness 10000) in paragraph at lines 2357--2359
 
  []
 
@@ -600,7 +596,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2356--2358
 Here is how much of TeX's memory you used:
  13612 strings out of 478994
  262114 string characters out of 5862207
- 563335 words of memory out of 5000000
+ 563324 words of memory out of 5000000
  30837 multiletter control sequences out of 15000+600000
  424299 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -636,7 +632,7 @@ fonts/type1/public/cm-super/sfrm0700.pfb><c:/texlive/2021/texmf-dist/fonts/type
 m-super/sfrm1000.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sf
 rm1200.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb
 ><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on Dispense-Cosmo.pdf (40 pages, 581640 bytes).
+Output written on Dispense-Cosmo.pdf (40 pages, 582058 bytes).
 PDF statistics:
  271 PDF objects out of 1000 (max. 8388607)
  194 compressed objects within 2 object streams
