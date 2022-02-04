@@ -8,6 +8,7 @@
 \usepackage{amsthm}		%teoremi
 \usepackage{tikz}		%disegnare immagini
 \usepackage{marginnote}
+\usepackage{makeidx}
 
 \let\oldmarginpar\marginpar
 \renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
@@ -44,6 +45,8 @@
 
 \title{Cosmologia del primo universo}
 \author{VG}	
+\makeindex
+
 
 
 \usepackage[top=2cm, bottom=1.3cm, left=1cm, right=5cm, heightrounded,
@@ -51,6 +54,8 @@ marginparwidth=4.6cm, marginparsep=3mm]{geometry} %to show the margin
 
 \begin{document}
 \maketitle
+\printindex
+
 
 \section{Richiami di RG}
 Nello spazio-tempo di Minkowski possiamo definire un prodotto scalare 
@@ -509,16 +514,16 @@ a(t) = a(t_0) \bigg[1 + \frac{\dot{a}}{a} (t - t_0) \bigg]
 \]
 Lo sviluppo è valido se $t -  t_0 \ll H_0^{-1}$. Se scriviamo $a(t)$ usando il redshift otteniamo
 \[
-1 + z = \frac{a(t_0)}{a(t)} = \frac{1}{[1 + H_0 (t - t_0) } = 1 + H_0(t - t_0)
+1 + z = \frac{a(t_0)}{a(t)} = \frac{1}{1 + H_0 (t - t_0)} = 1 - H_0(t - t_0)
 \]
 \[
 \boxed{
-\ra z =  H_0(t - t_0) = H_0 d
+\ra z =  H_0(t_0 - t) = H_0 d
 }
 \]
 che è la Legge di Hubble-Le Maitre.\\
 Ci chiediamo cosa accada alla densità di particelle n nella metrica FRW.\\
-Per isotropia $<v^i> = $(media spaziale) altrimenti ci sarebbe una corrente di particelle in una certa direzione. Allora una qualsiasi corrente $J^\mu = n u^\mu$ avrà $J^i = 0$
+Per isotropia $<v^i> = 0$ (media spaziale) altrimenti ci sarebbe una corrente di particelle in una certa direzione. Allora una qualsiasi corrente $J^\mu = n u^\mu$ avrà $J^i = 0$. \\
 \marginpar{$u^\mu$: 4-velocità mediata }
 In generale la 4-corrente è conservata, cioè
 \[
@@ -684,7 +689,7 @@ quindi un'accelerazione eterna.
 \section{Densità critica e curvatura}
 Ricordiamo la seconda equazione di Friedmann
 \[
-(\frac{\dot{a}}{a})^2 + \frac{k}{a^2} = \frac{8 \pi G}{3} \rho
+\bigg(\frac{\dot{a}}{a}\bigg)^2 + \frac{k}{a^2} = \frac{8 \pi G}{3} \rho
 \]
 Se definiamo
 \marginpar{al tempo attuale $\rho_{crit}$ vale $1.05\cdot 10^4 h^2 \frac{eV}{cm^2}$} 
@@ -693,7 +698,7 @@ Se definiamo
 \]
 Allora possiamo riscrivere l'equazione come
 \[
-\frac{k}{a H^2} = \frac{8 \pi G}{3 H^2}\rho - (\frac{\dot{a}}{a})^2 \frac{1}{H^2}
+\frac{k}{a H^2} = \frac{8 \pi G}{3 H^2}\rho - \bigg(\frac{\dot{a}}{a}\bigg)^2 \frac{1}{H^2}
 \]
 \marginpar{$\Omega = \frac{\rho}{\rho_{crit}}$ \\ $\Omega_k = -\frac{k}{a H^2}$}
 \[
@@ -880,7 +885,7 @@ e che
 Posso scrivere il LHS come
 \marginpar{Sviluppando al prim'ordine $\frac{a_0}{a(t)}$}
 \[
-\int_{t_s}^{t_0} \frac{dt}{a(t)} = \frac{1}{a_0} \int_{t_s}^{t_0} \frac{a_0}{a(t)}\,dt = \frac{1}{a_0} \int_{t_s}^{t_0}  (1 + H_0 (t_0 - t)) = \frac{1}{a_0} \bigg[(t_0 - t_s) + \frac{H_0}{2} (t_0 - t_s)^2 \bigg]
+\int_{t_s}^{t_0} \frac{dt}{a(t)} = \frac{1}{a_0} \int_{t_s}^{t_0} \frac{a_0}{a(t)}\,dt = \frac{1}{a_0} \int_{t_s}^{t_0}  (1 + H_0 (t_0 - t)) \simeq \frac{1}{a_0} \bigg[(t_0 - t_s) + \frac{H_0}{2} (t_0 - t_s)^2 \bigg]
 \]
 Quindi
 \[
@@ -895,14 +900,20 @@ Allora
 d_L^2 = a^2(t_0) r_s^2 (1 + z)^2 = a_0^2  \frac{1}{a_0^2 H_0^2} \bigg( z - \frac{z^2}{2} (1 + q_0)\bigg)^2(1 + z)^2
 \]
 \[
-\ra H_0 d_L = \bigg( z - \frac{z^2}{2} (1 + q_0)\bigg)(1 + z)
+\ra H_0 d_L = \bigg( z - \frac{z^2}{2} (1 + q_0)\bigg)(1 + z) 
+\]
+quindi
+\[
+\boxed{
+ H_0 d_L = z + \frac12 z^2 (1 - q_0)
+}
 \]
 che è la legge di Hubble al secondo ordine.
 
 \section{Distanza di diametro angolare}
-Vogliamo descrivere una certa area dello spazio in coordinate sferiche. Nel caso euclideo avremmo, come è noto, $ds^2 = d^2 d\Omega^2$, tuttavia nella metrica FRW questa espressione diventerà $ds^2 = d_A^2 d\Omega^2$, con $ds^2(r_s) = f_k(r_s)^2 a^2(t_s) d\Omega^2$. Possiamo allora ricavare $d_A^2$ ad una distanza pari ad $r_s$ invertendo l'equazione. Otteniamo così
+Vogliamo descrivere una certa area dello spazio in coordinate sferiche. Nel caso euclideo avremmo, come è noto, $ds^2 = d^2 d\Omega$, tuttavia nella metrica FRW questa espressione diventerà $ds^2 = d_A^2 d\Omega$, con $ds^2(r_s) = f_k(r_s)^2 a^2(t_s) d\Omega$. Possiamo allora ricavare $d_A^2$ ad una distanza pari ad $r_s$ invertendo l'equazione. Otteniamo così
 \[
-d_A^2 = \frac{ds^2}{d\Omega^2} = f_k^2(r_s) a^2(t_s)
+d_A^2 = \frac{ds^2}{d\Omega} = f_k^2(r_s) a^2(t_s)
 \]
 che per $k=0$ si riduce a 
 \[
@@ -988,6 +999,7 @@ Studiando le curve di luce $l(t$) delle supernove possiamo determinare $L(t)$.
 	\[
 	m = -2.5 \log\bigg(\frac{l}{L_\odot}\bigg) + c
 	\]
+	\marginpar{$$1\,pc \simeq 3\,\text{anni luce}\, \simeq 10^{13}\, km$$ \\ $$1\,ua \simeq 10^{11}\,m$$}
 	La magnitudine assoluta è poi la magnitudine relativa calcolata alla distanza di 10 pc, cioè
 	\[
 	M = -2.5 \log(L) + c
@@ -1005,11 +1017,12 @@ Se chiamiamo adesso $z_\Lambda$ il momento in cui $\Omega_\Lambda$ diventa domin
 \[
 \ra z_\Lambda = 0.44
 \]
+Possiamo chiederci come mai viviamo proprio in un'epoca dominata dalla costante cosmologica. Questo problema viene detto della coincidenza cosmica.
+
 \marginpar{?}
-Questo viene detto problema della coincidenza cosmica.
 
 \section{Natura energia oscura}
-L'energia oscura è un fluido a densità negativa di cui non si conosce la natura. Vediamo alcune possibili soluzioni a questo problema.\\
+L'energia oscura è un fluido a densità negativa la cui natura è ancora un mistero. Vediamo alcune possibili soluzioni a questo problema.\\
 \begin{enumerate}
 	\item Possiamo introdurre un nuovo tipo di materia come ad esempio un campo scalare con $w < -\frac13$. Se la densità di energia dipende dal tempo, cioè questo termine ha una dinamica, viene chiamato \textit{quintessenza}.
 	\item Possiamo modificare la relatività generale, in particolar modo l'azione
@@ -1044,7 +1057,7 @@ Moltiplicando a destra e a sinistra per $g_{\mu \nu}$ ed usando che $u^\mu u_\mu
 \]
 Allora, supponendo che il termine potenziale domini su quello cinetico (condizione di slow roll), si ha che
 \[
-w = -\frac{p}{\rho} \to -1
+w = \frac{p}{\rho} \to -1
 \]
 $\rho$ e p devono poi soddisfare anche l'equazione di conservazione
 \[
@@ -1055,15 +1068,15 @@ che diventa
 \[
 \ddot{Q} + 3 H \dot{Q} + \dfrac{\partial V}{\partial Q} = 0
 \]
-Soluzioni di questa equazione sono del tipo 
+Equazioni di questo genere si risolvono per potenziali del tipo
 \[
 V(Q) = M^{4 + \alpha} Q^\alpha \qquad \alpha > 0
 \]
 Tuttavia non c'è una ragione specifica per credere che il potenziale possa avere questa forma.
 
 \section{Problema materia oscura}
-Il modello $\Lambda$CDM richiede che $\Omega_{M, 0} = 0.3$, tuttavia si osserva che la materia barionica (galassie, elettroni, ...) non è così tanta ($\Omega_B \sim 0.05$) \\
-Possiamo studaire l'universo come un sistema statistico, cioè un gas di stelle che, sottoposto alla mutua gravità, si comprime e si riscalda. \\
+Il modello $\Lambda$CDM richiede che $\Omega_{M, 0} = 0.3$, tuttavia si osserva che la materia barionica non è così tanta ($\Omega_B \sim 0.05$) \\
+Possiamo studiare l'universo come un sistema statistico, cioè un gas di stelle che, sottoposto alla mutua gravità, si comprime e si riscalda. \\
 Studiando la velocità media delle particelle in campo gravitazionale mediante il teorema del viriale si può capire se la massa è corretta oppure c'è della massa \textit{nascosta}.
 \[
 2\cdot M <v^2> +  G M^2 <\frac1d> = 0
