@@ -1034,8 +1034,9 @@ L'energia oscura è un fluido a densità negativa la cui natura è ancora un mis
 \end{enumerate}
 La quintessenza è un campo scalare Q con azione
 \[
-S = \frac12 \partial_\mu Q \partial^\mu Q + V(Q)
+S = \int\,d^4x\sqrt{-g}\bigg(\frac12 \partial_\mu Q \partial^\mu Q + V(Q)\bigg)
 \]
+\marginpar{$$T^{\mu \nu} = -\frac{1}{\sqrt{-g}}\partial^\mu Q \frac{\delta (\sqrt{-g}\Lagr)}{\delta(\partial_\nu Q)}-g^{\mu \nu}\Lagr $$}
 Il suo tensore energia impulso sarà dunque
 \[
 T^{\mu \nu} = \partial^\mu Q \partial^\nu Q - g^{\mu \nu}\bigg(\frac12 \partial_\alpha Q \partial^\alpha Q + V(Q)\bigg)
@@ -1079,7 +1080,7 @@ Il modello $\Lambda$CDM richiede che $\Omega_{M, 0} = 0.3$, tuttavia si osserva 
 Possiamo studiare l'universo come un sistema statistico, cioè un gas di stelle che, sottoposto alla mutua gravità, si comprime e si riscalda. \\
 Studiando la velocità media delle particelle in campo gravitazionale mediante il teorema del viriale si può capire se la massa è corretta oppure c'è della massa \textit{nascosta}.
 \[
-2\cdot M <v^2> +  G M^2 <\frac1d> = 0
+2\cdot M <v^2> -  G M^2 <\frac1d> = 0
 \]
 Allora la massa dinamica M, cioè tutta la massa che genera il campo gravitazionale è
 \[
@@ -1139,7 +1140,7 @@ v = \sqrt{\frac{G M(<r)}{r}}
 \]
 Ci aspettiamo che per $r > r_*$, M diventi costante e quindi $v \propto \sqrt{\frac1r}$, tuttavia la curva di rotazione delle galassie si appiattisce. Questo ci suggerisce che ci debba essere qualcos'altro, che chiamiamo alone di materia oscura.
 \section{MACHOS (Massive Astrophysical Compact Halo ObjectS)}
-Sono i candidati alla materia oscura, ma barionica. Sono stati ricercati con il microlensing, ma la ricerca è fallita.
+Sono i candidati alla materia oscura, ma barionica. Sono stati ricercati con il microlensing, ma la ricerca è stata infruttuosa.
 \marginpar{inserire immagine}
 
 Le osservazioni non hanno trovato così tanti MACHOS e quindi si esclude che questi possano formare l'alone di materia oscura.
@@ -1194,10 +1195,8 @@ n_{bosoni} = \frac{g}{2 \pi^2} T^3 \Gamma(3) \zeta(3)
 mentre per la pressione basta ricordarci che per un fluido ultrarelativistico $p = \frac13 \rho$.\\
 Nel caso dei fermioni, invece, dobbiamo usare l'integrale notevole
 \[
-\int_{0}^{\infty} \frac{x^{n-1}}{e^x + 1} = B(n) \Gamma(n)
+\int_{0}^{\infty} \frac{x^{n-1}}{e^x + 1} = \bigg(1 - \frac{1}{2^{n-1}}\bigg) \Gamma(n)\zeta(n)
 \]
-\marginpar{$$B(2) = \frac{\pi^2}{12}$$ \\ $$B(4) = \frac78 \zeta(4)$$}
-dove $\{B(n)\}$ sono i numeri di Bernoulli.\\
 Allora nel caso ultrarelativistico
 \[
 \rho_F = \frac78 \rho_B 
@@ -1205,7 +1204,7 @@ Allora nel caso ultrarelativistico
 \[
 p_F = \frac78 p_B
 \]
-Nel caso non relativistico ($T \gg m$), invece, dobbiamo usare l'approssimazione 
+Nel caso non relativistico ($T \ll m$), invece, dobbiamo usare l'approssimazione 
 \[
 E \simeq m + \frac{p^2}{2m}
 \]
@@ -1214,7 +1213,7 @@ quindi
 n_i = \frac{g_i}{(2 \pi)^3} \int \frac{1}{exp[(E - \mu)/T]\pm 1} \, d^3p \simeq \frac{g_i}{(2 \pi)^3} \int \frac{1}{exp[(\frac{p^2}{2m} + m - \mu)/T]\pm 1} \, d^3p  
 \]
 In questo caso possiamo trascurare il $\pm 1$ al denominatore riottenendo così la statistica di Boltzmann 
-\marginpar{$$x = \frac{p^2}{2mT}$$ \\ $$\int_{0}^{\infty} x^n e^{-x}\, dx = \Gamma(n- 1)$$ }
+\marginpar{$$x = \frac{p^2}{2mT}$$ \\ $$\int_{0}^{\infty} x^{n - 1} e^{-x}\, dx = \Gamma(n)$$ \\ $$\Gamma(n + 1) = n\Gamma(n)$$ \\ $$\Gamma\bigg(\frac12\bigg) = \sqrt{\pi}$$ }
 \[
 n_i = \frac{g_i}{2 \pi^2} e^{(\mu - m)/T} \int_{0}^{\infty} p^2 e^{-\frac{p^2}{2mT}} \, dp = \frac{g_i}{2 \pi^2} e^{(\mu - m)/T} (mT)^{\frac32} \Gamma\bigg(\frac32\bigg) 
 \]
@@ -1250,7 +1249,7 @@ Nel caso non relativistico abbiamo invece che
 	\]
 	Allora
 	\[
-	n_+ - n_- = \frac{g}{2 \pi^2} \int_0^\infty dE\, E\sqrt{E^2 - m^2} \bigg[\frac{1}{exp[(E - \mu)/T] - 1} - \frac{1}{exp[(E + \mu)/T] - 1}  \bigg]
+	n_+ - n_- = \frac{g}{2 \pi^2} \int_0^\infty dp\, p^2 \bigg[\frac{1}{exp[(E - \mu)/T] - 1} - \frac{1}{exp[(E + \mu)/T] - 1}  \bigg]
 	\]
 	Quindi
 	\[
@@ -1434,7 +1433,7 @@ Cancellando i termini dei neutrini per quanto detto sopra si ha che
 \[
 2 a^3(T_f)T_f^3 = (2 + \frac78 \cdot 2 \cdot 2)a^3(T_i) T_i^3
 \]
-Poichè stiamo considerando particelle relativistiche quali i neutrini abbiamo che 
+Poichè stiamo considerando particelle relativistiche quali i neutrini abbiamo che, come detto prima, 
 \[
 \frac{a^3(T_i)}{a^3(T_f)} = \frac{T_f(\nu)^3}{T_i^3}
 \]
@@ -1473,6 +1472,7 @@ Cioè dopo 50 000 anni l'universo è stato dominato dalla materia.
 	\[
 	T_\gamma = T_0 \frac{a(T_0)}{a(T_D)}
 	\]
+	Quindi la temperatura finale dei gravitoni è molto più piccola di quella dei fotoni da cui si deduce che il disaccoppiamento dei gravitoni è avvenuto molto prima di quello dei fotoni. Per questo motivo possiamo trascurare i gravitoni.
 \end{oss}
 \section{CMB (Cosmic Microwave Background)}
 La Big Bang Nucleosintesi (BBN) è la fase iniziale dell'universo(10s - 20min di vita) in cui è iniziata la produzione di nuclei oltre l'idrogeno. La temperatura a cui essa è avvenuta è 
@@ -1491,7 +1491,7 @@ Possiamo allora stimare il redshift come (ricordando che $n \propto a^{-3}$)
 \[
 1 + Z_{BBN} = \bigg(\frac{n_B(T_{BBN})}{n_B(T_0)}\bigg)^\frac13 
 \]
-\marginpar{Inserire parte du Rayleigh-Jeans}
+\marginpar{Inserire parte di Rayleigh-Jeans}
 
 Studiamo adesso quando i fotoni si disaccoppiano dal bagno termico.\\
 Consideriamo lo scattering Thomson per cui
@@ -1512,7 +1512,7 @@ Per ogni urto si trasferisce poi un'energia pari a $\frac{(k_B T)^2}{m_e}$ allor
 \]
 Possiamo allora calcolare il rate del processo come
 \[
-\Gamma_\gamma \frac{\Delta E}{E} \Lambda_\gamma = 9\cdot10^{-29}\, s^{-1} (\Omega_{B, 0}h^2) \bigg(\frac{T}{T_0}\bigg)^4
+\Gamma_\gamma = \frac{\Delta E}{E} \Lambda_\gamma = 9\cdot10^{-29}\, s^{-1} (\Omega_{B, 0}h^2) \bigg(\frac{T}{T_0}\bigg)^4
 \]
 che va confrontato con $H = \sqrt{\frac{8 \pi G}{3} \rho}$ per trovare la temperatura a cui si disaccoppiano i fotoni, che risulta essere
 \marginpar{La temperatura di disaccoppiamento è detta anche temperatura di freeze out}
@@ -1714,7 +1714,7 @@ Vediamo la catena di processi che porta alla produzione di $^4He$
 	d + ^3H &\longrightarrow ~^4He + n \\
 	d + ^3He &\longrightarrow ~^4H_e + p \\	
 \end{align*}
-Tuttavia se abbiamo molti fotoni nel bagno termico, essi possono dissociare che cread un collo di bottiglia per la produzione di Elio.\\
+Tuttavia se abbiamo molti fotoni nel bagno termico, essi possono dissociare il deuterio che crea un collo di bottiglia per la produzione di Elio.\\
 Ricordiamo infatti che, per una specie A non relativistica
 \[
 n_A = g_A \bigg(\frac{m_A T}{2 \pi}\bigg)^\frac32 e^{(\mu_A - m_A)/T}
@@ -1806,7 +1806,7 @@ Inoltre
 \Omega_{B, 0} h^2 = \eta \cdot 3.65 \cdot 10^7 \qquad h \simeq 0.7
 \]
 \[
-\ra \Omega_{B, 0} \simeq 0.4 \ll \Omega_{M, 0} = 0.3
+\ra \Omega_{B, 0} \simeq 0.04 \ll \Omega_{M, 0} = 0.3
 \]
 Studiamo infine la produzione del Litio.
 \\
@@ -1822,7 +1822,7 @@ La BBN fornisce dunque un limite su $g_*$ in quanto
 \[
 \Delta N_\nu = 1 \ra \Delta g_* = 0.454
 \]
-Introducendo, per esempio, un nuovo tipo di neutrino nel bagno termico $g_*$ aumenterebbe di $\Delta g_*$, tuttavia dalle osservazioni sperimentali deduciamo che $\Delta_\nu < 0.4$.
+Introducendo, per esempio, un nuovo tipo di neutrino nel bagno termico $g_*$ aumenterebbe di $\Delta g_*$, tuttavia dalle osservazioni sperimentali deduciamo che $\Delta N_\nu < 0.4$.
 \section{Equazione di Boltzmann}
 Per una specie particellare di densità $n$ nell'universo di Friedmann si ha che
 \[
