@@ -733,10 +733,12 @@ q = \frac{4 \pi G}{3 H^2} \rho (1 + 3w)
 	\[
 	<\rho>_{p0} = \int_{0}^{k_{max}} \frac12 k \frac{d^3 k}{(2 \pi )^3} = \frac{k_{max}^4}{16 \pi^2}
 	\]
-	dove $k_max$ è il cutoff ultravioletto della teoria che stiamo considerando.\\
+	dove $k_{max}$ è il cutoff ultravioletto della teoria che stiamo considerando.\\
 	Nel caso della gravità quantistica $k_{max} \sim 10^{19} \, GeV \ra <\rho>_{p0} \sim 10^{73} \, GeV^4$\\
 	Per la QCD $k_{max} \sim 100 \, MeV \ra <\rho>_{p0} \sim 10^{-6}\, GeV^4$\\
 	Per il modello standard $<\rho>_{p0} \sim 10^{6}\, GeV^4$.
+	\\
+	Tuttavia sperimentalmente si misurano valori molto più bassi.
 \end{oss}
 
 Possiamo scrivere $\Omega_M$ (ed analogamente le altre $\Omega$) come
@@ -791,7 +793,7 @@ t_0= \frac{1}{H_0}\int_{0}^{1} \frac{1}{x E(x)}\,dx
 	t_0 = \frac{1}{H_0} \int_{0}^{1} \frac{dx}{x \cdot x^{-\frac32}} = \frac23 H_0^{-1} = 7\cdot 10^9 h^{-1} yrs = 9.5 \cdot 10^9 yrs
 	\]
 	Tuttavia confrontando questo valore con la vita media dei radionuclei o delle nane bianche si osserva che l'età è troppo bassa.\\
-	La luminosità minima delle nane bianche è $3\cdot10^{-5} L_{solare}$, allora queste stelle non hanno avuto abbastanza tempo per raffreddarsi, secondo il modello di Einstein. Dalla luminosità di queste stelle si è infatti stimato che $t_0 = 10 \pm 2\, Gy$, mentre dalla CMB si stima $t_0 = 13.7 \pm 0.2\, Gy$
+	La luminosità minima delle nane bianche è $3\cdot10^{-5} L_\odot$, allora queste stelle non hanno avuto abbastanza tempo per raffreddarsi, secondo il modello di Einstein. Dalla luminosità di queste stelle si è infatti stimato che $t_0 = 10 \pm 2\, Gy$, mentre dalla CMB si stima $t_0 = 13.7 \pm 0.2\, Gy$
 \end{ex}
 \section{Modello $\Lambda$CDM}
 Nel modello $\Lambda$CDM abbiamo che $\Omega_\Lambda + \Omega_{M, 0} = 1$ quindi
@@ -832,7 +834,8 @@ $r_*$ è detto orizzonte degli eventi.
 	r_* = \frac{1}{a_0 H}e^{-Ht_*}
 	\]
 \end{ex}
-Se $a \propto t^n$, l'integrale non converge per $w > -\frac13$ quindi non c'è orizzonte degli eventi.
+\marginpar{$$ n= \frac23 \frac{1}{1 + w}$$}
+Se $a \propto t^n$, l'integrale non converge $n < 1$, cioè per $w > -\frac13$ quindi non c'è orizzonte degli eventi.
 
 \section{Distanza di Luminosità}
 Ricordiamo che 
@@ -1013,13 +1016,12 @@ Se chiamiamo adesso $z_\Lambda$ il momento in cui $\Omega_\Lambda$ diventa domin
 \[
 \Omega_\Lambda = \Omega_{M, 0} (1 + z_\Lambda)^3
 \]
-\marginpar{$\Omega_\Lambda = 0.25$ \\ $\Omega_{M, 0} = 0.75$}
+\marginpar{$\Omega_\Lambda = 0.75$ \\ $\Omega_{M, 0} = 0.25$}
 \[
 \ra z_\Lambda = 0.44
 \]
 Possiamo chiederci come mai viviamo proprio in un'epoca dominata dalla costante cosmologica. Questo problema viene detto della coincidenza cosmica.
 
-\marginpar{?}
 
 \section{Natura energia oscura}
 L'energia oscura è un fluido a densità negativa la cui natura è ancora un mistero. Vediamo alcune possibili soluzioni a questo problema.\\
@@ -1036,7 +1038,7 @@ La quintessenza è un campo scalare Q con azione
 \[
 S = \int\,d^4x\sqrt{-g}\bigg(\frac12 \partial_\mu Q \partial^\mu Q + V(Q)\bigg)
 \]
-\marginpar{$$T^{\mu \nu} = -\frac{1}{\sqrt{-g}}\partial^\mu Q \frac{\delta (\sqrt{-g}\Lagr)}{\delta(\partial_\nu Q)}-g^{\mu \nu}\Lagr $$}
+\marginpar{$$T^{\mu \nu} = \frac{1}{\sqrt{-g}}\partial^\mu Q \frac{\delta (\sqrt{-g}\Lagr)}{\delta(\partial_\nu Q)}-g^{\mu \nu}\Lagr $$}
 Il suo tensore energia impulso sarà dunque
 \[
 T^{\mu \nu} = \partial^\mu Q \partial^\nu Q - g^{\mu \nu}\bigg(\frac12 \partial_\alpha Q \partial^\alpha Q + V(Q)\bigg)
@@ -1119,12 +1121,13 @@ dove $\mathcal{L} \sim 2\cdot 10^8 h L_\odot\, Mpc^{-3}$. Allora
 \[
 \Omega_{M, 0} = \frac{\rho_{M, 0}}{\rho_{crit, 0}} = \frac{M}{L} \frac{\mathcal{L}}{\rho_{crit, 0}} \sim 0.15
 \]
+Sebbene questo valore sia minore di quanto trovato in altri modi, ci dice comunque che $\Omega_{M, 0} < 1$.\\
 I gas ionizzati contenuti nei cluster possono spiegare il valore di $\Omega_{M, 0}$?\\
 Usando il fatto che 
 \[
 \frac12 M <v^2> = k_B T
 \]
-con $<v> \sim 10^3 \frac{km}{s}$ si ottengono temperature nel range di $10^7 - 10^8 \, K$ che corrispondono all'emissione di raggi X.
+con $<v> \sim 10^3 \frac{km}{s}$ si ottengono temperature nel range di $10^7 - 10^8 \, K$ che corrispondono all'emissione di raggi X. Tuttavia poca materia nei cluster può emettere nei raggi X.
 \section{Curve di rotazione delle galassie}
 Ci aspettiamo che all'equilibrio gravitazionale 
 \[
@@ -1775,6 +1778,9 @@ T_A = \frac{B_A (A - 1)^{-1}}{-1.5 \ln\bigg(\frac{T_A}{m_p}\bigg) - \ln\eta}
 \]
 con $X_n \sim X_p \sim 1$.
 \begin{ex}
+	\[
+	T_{d} \sim 0.06 \, MeV
+	\]
 	\[
 	T_{~^3H} \sim 1.4 \cdot 10^9 \, K \sim 0.1 \, MeV
 	\]
